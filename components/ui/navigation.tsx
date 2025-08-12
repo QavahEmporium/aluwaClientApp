@@ -14,7 +14,7 @@ export function Navigation() {
     { href: "/", label: "Home", icon: Home },
     { href: "/products", label: "Products", icon: Package },
     { href: "/cart", label: "Cart", icon: ShoppingCart },
-    { href: "/profile", label: "Profile", icon: User },
+    { href: "/profile/account", label: "Profile", icon: User },
   ];
 
   return (
