@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { products } from "@/data/products";
-import { ProductCard } from "@/components/ui/product-card3";
+import { ProductCard } from "@/components/ui/products-list-card";
 import { Button } from "@/components/ui/button";
 
 const categories = ["All", "Beard", "Hair", "Tools", "Bundles"];
