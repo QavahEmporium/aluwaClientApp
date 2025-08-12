@@ -4,13 +4,17 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/context/CartContext";
+import { Card, CardContent } from "./card";
 
 interface ProductCardProps {
   product: any;
   layout?: "carousel" | "grid";
 }
 
-export function ProductCard({ product, layout = "carousel" }: ProductCardProps) {
+export function ProductCard({
+  product,
+  layout = "carousel",
+}: ProductCardProps) {
   const { addToCart } = useCart();
 
   const baseClasses =
@@ -19,39 +23,52 @@ export function ProductCard({ product, layout = "carousel" }: ProductCardProps) 
       : "w-full";
 
   return (
-    <div
-      className={`${baseClasses} flex flex-col border border-black rounded-lg overflow-hidden`}
+    <Card
+      className={`${baseClasses} flex flex-col rounded-lg overflow-hidden py-2`}
     >
-      {/* Image */}
-      <Link href={`/products/${product.id}`} className="relative aspect-square w-full">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          className="object-cover"
-          sizes={
-            layout === "carousel"
-              ? "(max-width: 768px) 220px, (max-width: 1024px) 250px, 280px"
-              : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          }
-          priority
-        />
-      </Link>
-
-      {/* Content */}
-      <div className="p-4 flex flex-col flex-1">
-        <Link href={`/products/${product.id}`} className="hover:underline">
-          <h3 className="text-base sm:text-lg font-semibold mb-1">{product.name}</h3>
+      <CardContent className="p-2 flex flex-col gap-2 flex-grow">
+        {/* Image */}
+        <Link
+          href={`/products/${product.id}`}
+          className="relative w-full aspect-square mb-2"
+        >
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-cover rounded"
+            sizes={
+              layout === "carousel"
+                ? "(max-width: 768px) 220px, (max-width: 1024px) 250px, 280px"
+                : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            }
+            priority
+          />
         </Link>
 
-        <Badge className="mb-2 w-fit">{product.category}</Badge>
+        {/* Content */}
+        <div className="p-2 flex flex-col flex-1">
+          <Link href={`/products/${product.id}`} className="hover:underline">
+            <h3 className="text-base sm:text-lg font-semibold mb-1">
+              {product.name}
+            </h3>
+          </Link>
 
-        <p className="font-bold text-sm sm:text-lg mb-4">${product.price.toFixed(2)}</p>
+          <Badge className="mb-2 w-fit">{product.category}</Badge>
 
-        <Button onClick={() => addToCart(product)} className="mt-auto w-full" size="sm">
-          Add to Cart
-        </Button>
-      </div>
-    </div>
+          <p className="font-bold text-sm sm:text-lg mb-4">
+            ${product.price.toFixed(2)}
+          </p>
+
+          <Button
+            onClick={() => addToCart(product)}
+            className="mt-auto w-full"
+            size="sm"
+          >
+            Add to Cart
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
