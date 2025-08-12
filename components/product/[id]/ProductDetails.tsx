@@ -7,6 +7,7 @@ import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
 import { CartDrawer } from "@/components/cart/cart-drawer";
+import { ChevronLeft } from "lucide-react";
 
 export default function ProductDetails({ id }: { id: string }) {
   const product = products.find((p) => p.id === Number(id));
@@ -32,9 +33,9 @@ export default function ProductDetails({ id }: { id: string }) {
     <main className="min-h-screen bg-white text-black p-6 max-w-6xl mx-auto">
       <button
         onClick={() => router.back()}
-        className="mb-6 text-sm text-gray-600 hover:underline"
+        className="flex items-center mb-6 text-sm text-gray-600 hover:underline"
       >
-        ← Back
+        <ChevronLeft /> Back
       </button>
 
       <div className="flex flex-col md:flex-row gap-10">
@@ -81,33 +82,18 @@ export default function ProductDetails({ id }: { id: string }) {
             </p>
 
             {/* Quantity selector */}
-            <div className="flex items-center border border-gray-300 rounded-md overflow-hidden w-28">
-              <button
+            <div className="flex items-center justify-between rounded-xl p-1 border border-gray-300 rounded-md overflow-hidden w-28">
+              <Button
+                size="sm"
                 onClick={() => setQuantity((q) => (q > 1 ? q - 1 : 1))}
-                className="w-8 h-8 text-lg font-bold text-center hover:bg-gray-100"
-                aria-label="Decrease quantity"
               >
-                −
-              </button>
-              <input
-                type="number"
-                min={1}
-                value={quantity}
-                onChange={(e) => {
-                  const val = parseInt(e.target.value);
-                  if (!isNaN(val) && val > 0) setQuantity(val);
-                }}
-                className="w-full text-center outline-none"
-              />
-              <button
-                onClick={() => setQuantity((q) => q + 1)}
-                className="w-8 h-8 text-lg font-bold text-center hover:bg-gray-100"
-                aria-label="Increase quantity"
-              >
+                -
+              </Button>
+              <span>{quantity}</span>
+              <Button size="sm" onClick={() => setQuantity((q) => q + 1)}>
                 +
-              </button>
+              </Button>
             </div>
-
             {/* Add to Cart button */}
             <Button
               onClick={() => addToCart(product, quantity)}
