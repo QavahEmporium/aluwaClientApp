@@ -3,19 +3,20 @@
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Login() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const { login } = useAuth();
   const redirectPath = searchParams.get("redirect") || "/";
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: Replace with real auth check
-    localStorage.setItem("user", JSON.stringify({ email }));
+    login({ email });
     router.push(redirectPath);
   };
 
