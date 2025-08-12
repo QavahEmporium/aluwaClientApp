@@ -6,13 +6,14 @@ import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 
 export default function OrderConfirmationPage() {
-  const { cart, closeCart } = useCart();
+  const { cart, closeCart, clearCart } = useCart();
   const router = useRouter();
 
   useEffect(() => {
     // Clear cart when arriving at confirmation page
     closeCart();
-  }, [closeCart]);
+    clearCart();
+  }, []);
 
   if (!cart.length) {
     return (
