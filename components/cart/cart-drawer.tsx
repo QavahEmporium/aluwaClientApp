@@ -4,11 +4,12 @@ import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import { X, Minus, Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function CartDrawer() {
   const { cart, isOpen, closeCart, removeFromCart, addToCart, decreaseQty } =
     useCart();
-
+  const route = useRouter();
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
@@ -76,9 +77,20 @@ export function CartDrawer() {
       {cart.length > 0 && (
         <div className="p-4 border-t border-gray-200">
           <p className="font-semibold mb-3">Total: ${total.toFixed(2)}</p>
-          <Button className="w-full bg-black text-white hover:bg-gray-800">
-            Checkout
-          </Button>
+          <div className="flex flex-col gap-y-2">
+            <Button
+              onClick={() => route.push("/checkout")}
+              className="w-full bg-black text-white hover:bg-gray-800"
+            >
+              Checkout
+            </Button>{" "}
+            <Button
+              onClick={() => closeCart()}
+              className="w-full border bg-white text-black hover:bg-black hover:text-white"
+            >
+              Continue Shopping
+            </Button>
+          </div>
         </div>
       )}
     </div>
