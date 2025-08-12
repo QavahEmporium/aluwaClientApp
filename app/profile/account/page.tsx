@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function AccountSettings() {
@@ -14,6 +15,13 @@ export default function AccountSettings() {
     // TODO: Save user info to backend/auth store
   };
 
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    router.push("/");
+  };
+
   return (
     <form
       onSubmit={handleSave}
@@ -25,7 +33,7 @@ export default function AccountSettings() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border border-gray-300 rounded px-4 py-2"
+          className="border border-gray-300 rounded-lg focus:outline-none focus:border-black px-4 py-2"
           required
         />
       </label>
@@ -36,7 +44,7 @@ export default function AccountSettings() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border border-gray-300 rounded px-4 py-2"
+          className="border border-gray-300 rounded-lg focus:outline-none focus:border-black px-4 py-2"
           required
         />
       </label>
@@ -47,16 +55,25 @@ export default function AccountSettings() {
           type="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="border border-gray-300 rounded px-4 py-2"
+          className="border border-gray-300 rounded-lg focus:outline-none focus:border-black px-4 py-2"
         />
       </label>
 
-      <button
-        type="submit"
-        className="bg-black text-white py-2 rounded hover:bg-gray-900 transition"
-      >
-        Save Changes
-      </button>
+      <div className="flex flex-col gap-3">
+        <button
+          type="submit"
+          className="bg-black text-white py-2 rounded hover:bg-gray-900 transition rounded-lg"
+        >
+          Save Changes
+        </button>
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="bg-white text-red-400 border py-2 rounded hover:bg-gray-300 transition rounded-lg"
+        >
+          Log Out
+        </button>
+      </div>
     </form>
   );
 }
