@@ -1,11 +1,8 @@
-// app/profile/layout.tsx or components/ProfileLayout.tsx (import in pages)
-
-// For Next.js app dir, this would be app/profile/layout.tsx
-
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { User } from "lucide-react";
 
 export default function ProfileLayout({
   children,
@@ -22,7 +19,14 @@ export default function ProfileLayout({
 
   return (
     <main className="min-h-screen bg-white text-black pt-[64px] pb-[72px] max-w-5xl mx-auto px-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">My Profile</h1>
+      <header className="flex flex-col items-center justify-center mb-6">
+        <h1 className="text-3xl font-bold mb-3">My Profile</h1>
+        <User
+          className="w-24 h-24 p-3 text-black border-4 border-gray-300 rounded-full"
+          aria-label="User avatar"
+        />
+      </header>
+
       <nav className="flex justify-center gap-6 mb-8 border-b border-gray-300">
         {tabs.map(({ href, label }) => {
           const isActive = pathname === href;

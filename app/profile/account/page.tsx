@@ -1,36 +1,62 @@
-// app/profile/account/page.tsx
+"use client";
 
-export default function AccountSettingsPage() {
+import { useState } from "react";
+
+export default function AccountSettings() {
+  // Dummy initial user data — replace with real user state/store
+  const [name, setName] = useState("John Doe");
+  const [email, setEmail] = useState("john@example.com");
+  const [phone, setPhone] = useState("");
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(`Profile updated:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`);
+    // TODO: Save user info to backend/auth store
+  };
+
   return (
-    <section className="max-w-md mx-auto space-y-6">
-      <h2 className="text-xl font-semibold mb-4">Account Settings</h2>
-      <form>
-        <label className="block mb-2 font-semibold" htmlFor="name">
-          Name
-        </label>
+    <form
+      onSubmit={handleSave}
+      className="max-w-lg mx-auto flex flex-col gap-6 bg-white"
+    >
+      <label className="flex flex-col gap-1">
+        Name
         <input
-          id="name"
           type="text"
-          className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
-          placeholder="John Doe"
-          disabled
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="border border-gray-300 rounded px-4 py-2"
+          required
         />
+      </label>
 
-        <label className="block mb-2 font-semibold" htmlFor="email">
-          Email
-        </label>
+      <label className="flex flex-col gap-1">
+        Email
         <input
-          id="email"
           type="email"
-          className="w-full border border-gray-300 rounded px-3 py-2"
-          placeholder="john@example.com"
-          disabled
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="border border-gray-300 rounded px-4 py-2"
+          required
         />
+      </label>
 
-        <p className="mt-4 text-gray-500 italic text-sm">
-          Account settings editing is not implemented in this MVP.
-        </p>
-      </form>
-    </section>
+      <label className="flex flex-col gap-1">
+        Phone (optional)
+        <input
+          type="tel"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="border border-gray-300 rounded px-4 py-2"
+        />
+      </label>
+
+      <button
+        type="submit"
+        className="bg-black text-white py-2 rounded hover:bg-gray-900 transition"
+      >
+        Save Changes
+      </button>
+    </form>
   );
 }
