@@ -6,11 +6,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ui/product-card";
 import { CartIcon } from "@/components/cart/cart-icon";
-import { CartDrawer } from "@/components/cart/cart-drawer";
 import { products } from "@/data/products";
+import { useRouter } from "next/navigation";
 
 export default function LandingPage() {
   const categories = Array.from(new Set(products.map((p) => p.category)));
+  const route = useRouter();
 
   return (
     <main className="bg-white text-black min-h-screen flex flex-col">
@@ -39,7 +40,10 @@ export default function LandingPage() {
           <p className="text-white/90 mb-6 max-w-md mx-auto">
             Natural, effective, and designed for the modern gentleman.
           </p>
-          <Button className="bg-white text-black hover:bg-gray-200">
+          <Button
+            onClick={() => route.push("/products")}
+            className="bg-white text-black hover:bg-gray-200"
+          >
             Shop Now
           </Button>
         </div>
