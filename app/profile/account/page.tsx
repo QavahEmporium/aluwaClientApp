@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -8,6 +9,8 @@ export default function AccountSettings() {
   const [name, setName] = useState("John Doe");
   const [email, setEmail] = useState("john@example.com");
   const [phone, setPhone] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const { logout } = useAuth();
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,8 +20,9 @@ export default function AccountSettings() {
 
   const router = useRouter();
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
+  const handleConfirmLogout = () => {
+    logout();
+    setShowModal(false);
     router.push("/");
   };
 
@@ -68,12 +72,37 @@ export default function AccountSettings() {
         </button>
         <button
           type="button"
-          onClick={handleLogout}
+          onClick={() => setShowModal(true)}
           className="bg-white text-red-400 border py-2 rounded hover:bg-gray-300 transition rounded-lg"
         >
           Log Out
         </button>
       </div>
+
+      {/* Confirmation Modal */}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-10">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 className="text-lg font-semibold mb-4">
+              Are you sure you want to logout?
+            </h2>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={handleConfirmLogout}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              >
+                Yes, Logout
+              </button>
+              <button
+                onClick={() => setShowModal(false)}
+                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </form>
   );
 }
