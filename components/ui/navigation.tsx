@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
-import { Home, Search, ShoppingCart, User } from "lucide-react";
+import { Home, Package, Search, ShoppingCart, User } from "lucide-react";
 
 export function Navigation() {
   const pathname = usePathname();
@@ -12,7 +12,7 @@ export function Navigation() {
 
   const navItems = [
     { href: "/", label: "Home", icon: Home },
-    { href: "/search", label: "Search", icon: Search },
+    { href: "/products", label: "Products", icon: Package },
     { href: "/cart", label: "Cart", icon: ShoppingCart },
     { href: "/profile", label: "Profile", icon: User },
   ];
