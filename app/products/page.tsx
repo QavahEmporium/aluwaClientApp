@@ -18,7 +18,7 @@ export default function ProductListingPage() {
       : products.filter((p) => p.category === selectedCategory);
 
   return (
-    <main className="md:flex md:flex-col md:items-center md:justify-center bg-white text-black min-h-screen pt-16 md:pt-20 pb-20 md:pb-0 px-4">
+    <main className="md:flex md:flex-col md:items-center md:justify-center bg-white text-black min-h-screen pt-16 md:pt-20 pb-20 md:pb-0 px-3">
       <PageHeader />
       {/* Category Filter */}
       <div className="flex gap-2 overflow-x-auto pb-3 scrollbar-hide my-6 md:mb-6">
@@ -40,7 +40,7 @@ export default function ProductListingPage() {
 
       {/* Product Grid */}
       {filteredProducts.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {filteredProducts.map((product) => (
             <div key={product.id} className="flex flex-col">
               <ProductCard product={product} />
