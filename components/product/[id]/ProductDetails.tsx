@@ -118,6 +118,7 @@ export default function ProductDetails({ id }: { id: string }) {
           </div>
         </div>
       </div>
+      <CartDrawer />
     </main>
   );
 }

@@ -2,26 +2,21 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ui/product-card";
 import { CartIcon } from "@/components/cart/cart-icon";
 import { products } from "@/data/products";
 import { useRouter } from "next/navigation";
+import PageHeader from "@/components/ui/page-header";
+import { CartDrawer } from "@/components/cart/cart-drawer";
 
 export default function LandingPage() {
   const categories = Array.from(new Set(products.map((p) => p.category)));
   const route = useRouter();
 
   return (
-    <main className="bg-white text-black min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="md:hidden fixed fixed top-0 left-0 right-0 flex justify-between items-center px-6 py-4 border-b border-gray-200 bg-white z-50">
-        <Link href="/" className="text-lg font-bold">
-          My Shop
-        </Link>
-        <CartIcon />
-      </header>
+    <main className="bg-white text-black min-h-screen flex flex-col pb-12">
+      <PageHeader />
 
       {/* Hero Section */}
       <section className="relative h-[70vh] flex items-center justify-center">
@@ -83,10 +78,12 @@ export default function LandingPage() {
         <Button
           variant="secondary"
           className="bg-white text-black hover:bg-gray-200"
+          onClick={() => route.push("/products")}
         >
           Browse All Products
         </Button>
       </section>
+      <CartDrawer />
     </main>
   );
 }

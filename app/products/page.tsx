@@ -4,6 +4,8 @@ import { useState } from "react";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/ui/products-list-card";
 import { Button } from "@/components/ui/button";
+import PageHeader from "@/components/ui/page-header";
+import { CartDrawer } from "@/components/cart/cart-drawer";
 
 const categories = ["All", "Beard", "Hair", "Tools", "Bundles"];
 
@@ -17,8 +19,9 @@ export default function ProductListingPage() {
 
   return (
     <main className="md:flex md:flex-col md:items-center md:justify-center bg-white text-black min-h-screen pt-16 md:pt-20 pb-20 md:pb-0 px-4">
+      <PageHeader />
       {/* Category Filter */}
-      <div className="flex gap-2 overflow-x-auto pb-3 scrollbar-hide mb-6">
+      <div className="flex gap-2 overflow-x-auto pb-3 scrollbar-hide my-6 md:mb-6">
         {categories.map((cat) => (
           <Button
             key={cat}
@@ -47,6 +50,7 @@ export default function ProductListingPage() {
       ) : (
         <p className="text-gray-500 text-center">No products found.</p>
       )}
+      <CartDrawer />
     </main>
   );
 }
