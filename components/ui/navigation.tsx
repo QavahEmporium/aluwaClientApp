@@ -66,7 +66,7 @@ export function Navigation() {
               </Link>
               <Link
                 href="/register"
-                className="flex items-center gap-2 bg-black text-white px-3 py-1 rounded hover:bg-gray-900"
+                className="flex items-center gap-2 text-gray-500 hover:text-black font-medium"
               >
                 <UserPlus className="w-5 h-5" />
                 Register
