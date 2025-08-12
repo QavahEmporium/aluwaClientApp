@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Register() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectPath = searchParams.get("redirect") || "/profile";
+  const redirectPath = searchParams.get("redirect") || "/";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

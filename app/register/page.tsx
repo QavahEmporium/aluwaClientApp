@@ -1,5 +1,5 @@
 import Register from "@/components/register/Register";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 
 export default function RegisterPage() {
   return (
