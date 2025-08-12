@@ -3,23 +3,35 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
-import { Home, Package, Search, ShoppingCart, User } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
+import {
+  Home,
+  Package,
+  ShoppingCart,
+  User,
+  LogIn,
+  UserPlus,
+} from "lucide-react";
 
 export function Navigation() {
   const pathname = usePathname();
   const { cart } = useCart();
+  const { user } = useAuth();
   const badge = cart?.length || 0;
 
   const navItems = [
     { href: "/", label: "Home", icon: Home },
     { href: "/products", label: "Products", icon: Package },
     { href: "/cart", label: "Cart", icon: ShoppingCart },
-    { href: "/profile/account", label: "Profile", icon: User },
   ];
+
+  if (user) {
+    navItems.push({ href: "/profile/account", label: "Profile", icon: User });
+  }
 
   return (
     <>
-      {/* Top Navbar for Desktop */}
+      {/* Desktop Navbar */}
       <nav className="hidden md:flex fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50 justify-between items-center px-6 py-3">
         <Link href="/" className="text-xl font-bold">
           MyShop
@@ -42,10 +54,29 @@ export function Navigation() {
               )}
             </Link>
           ))}
+
+          {!user && (
+            <>
+              <Link
+                href="/login"
+                className="flex items-center gap-2 text-gray-500 hover:text-black font-medium"
+              >
+                <LogIn className="w-5 h-5" />
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="flex items-center gap-2 bg-black text-white px-3 py-1 rounded hover:bg-gray-900"
+              >
+                <UserPlus className="w-5 h-5" />
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </nav>
 
-      {/* Bottom Navbar for Mobile */}
+      {/* Mobile Navbar */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 flex justify-around items-center py-3">
         {navItems.map(({ href, label, icon: Icon }) => (
           <Link
@@ -66,6 +97,25 @@ export function Navigation() {
             <span className="mt-0.5">{label}</span>
           </Link>
         ))}
+
+        {!user && (
+          <>
+            <Link
+              href="/login"
+              className="flex flex-col items-center text-xs text-gray-500"
+            >
+              <LogIn className="w-5 h-5 mb-0.5" />
+              <span>Login</span>
+            </Link>
+            <Link
+              href="/register"
+              className="flex flex-col items-center text-xs text-black font-semibold"
+            >
+              <UserPlus className="w-5 h-5 mb-0.5" />
+              <span>Register</span>
+            </Link>
+          </>
+        )}
       </nav>
     </>
   );
