@@ -107,13 +107,13 @@ export function Navigation() {
               <LogIn className="w-5 h-5 mb-0.5" />
               <span>Login</span>
             </Link>
-            <Link
+            {/* <Link
               href="/register"
               className="flex flex-col items-center text-xs text-black font-semibold"
             >
               <UserPlus className="w-5 h-5 mb-0.5" />
               <span>Register</span>
-            </Link>
+            </Link> */}
           </>
         )}
       </nav>
