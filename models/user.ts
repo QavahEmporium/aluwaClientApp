@@ -17,6 +17,12 @@ const UserSchema = new Schema<UserDocument>(
       lowercase: true,
       trim: true,
     },
+    contactNumber: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
     passwordHash: { type: String, required: true },
     role: { type: String, enum: ["customer", "admin"], default: "customer" },
     avatarUrl: { type: String },
