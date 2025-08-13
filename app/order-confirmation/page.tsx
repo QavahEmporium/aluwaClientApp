@@ -3,19 +3,21 @@
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function OrderConfirmationPage() {
   const { cart, closeCart, clearCart } = useCart();
   const router = useRouter();
+  const [cartTemp, setCartTemp] = useState(cart);
 
   useEffect(() => {
     // Clear cart when arriving at confirmation page
     closeCart();
-    clearCart();
+    setCartTemp(cart);
+    return () => clearCart();
   }, []);
 
-  if (!cart.length) {
+  if (!cartTemp.length) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center p-6 pt-[64px] pb-[72px] bg-white text-black">
         <h1 className="text-3xl font-bold mb-4">No recent order found</h1>
@@ -24,7 +26,10 @@ export default function OrderConfirmationPage() {
     );
   }
 
-  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const total = cartTemp.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   return (
     <main className="min-h-screen bg-white text-black p-6 pt-[64px] pb-[72px] max-w-lg mx-auto flex flex-col items-center">
@@ -39,7 +44,7 @@ export default function OrderConfirmationPage() {
       <section className="w-full border border-gray-300 rounded-md p-4 mb-6">
         <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
         <ul className="divide-y divide-gray-200">
-          {cart.map((item) => (
+          {cartTemp.map((item) => (
             <li key={item.id} className="py-2 flex justify-between">
               <span>
                 {item.name} x {item.quantity}
