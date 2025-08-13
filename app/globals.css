@@ -41,6 +41,28 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --color-turquoise-50: #f1f9fa;
+  --color-turquoise-100: #dcf1f1;
+  --color-turquoise-200: #bce2e5;
+  --color-turquoise-300: #7fc5cc;
+  --color-turquoise-400: #59adb7;
+  --color-turquoise-500: #3d919d;
+  --color-turquoise-600: #357785;
+  --color-turquoise-700: #31626d;
+  --color-turquoise-800: #2f525b;
+  --color-turquoise-900: #2b464e;
+  --color-turquoise-950: #182d34;
+  --color-pinklet-50: #fef2f3;
+  --color-pinklet-100: #ffe1e4;
+  --color-pinklet-200: #ffc0c6;
+  --color-pinklet-300: #fea3ac;
+  --color-pinklet-400: #fb6e7b;
+  --color-pinklet-500: #f24152;
+  --color-pinklet-600: #e02234;
+  --color-pinklet-700: #bc1929;
+  --color-pinklet-800: #9b1925;
+  --color-pinklet-900: #811b25;
+  --color-pinklet-950: #46090f;
 }
 
 :root {
