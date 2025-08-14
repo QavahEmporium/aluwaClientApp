@@ -3,7 +3,7 @@ export type IUser = {
   name: string;
   email: string;
   contactNumber: string;
-  passwordHash: string;
   role: "customer" | "admin";
+  authType: string;
   avatarUrl?: string;
 };

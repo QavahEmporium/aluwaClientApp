@@ -3,11 +3,8 @@ import { z } from "zod";
 
 export const registerUserformSchema = z
   .object({
-    username: z
-      .string()
-      .trim()
-      .min(3, "Username must be at least 3 characters")
-      .regex(/^\S+$/, "Username must not contain spaces"),
+    name: z.string().trim().min(3, "Username must be at least 3 characters"),
+    email: z.string().email("Invalid email address"),
     contactNumber: z
       .string()
       .min(6, {
@@ -44,14 +41,23 @@ export const registerUserformSchema = z
 
 export type RegisterUserState = {
   errors?: {
-    username?: string[];
+    name?: string[];
+    email?: string[];
     password?: string[];
     confirmPassword?: string[];
   };
   message?: string | null;
 };
 
-export const loginUserSchema = z.object({
+export type LoginUserState = {
+  errors?: {
+    email?: string[];
+    password?: string[];
+  };
+  message?: string | null;
+};
+
+export const loginUserFormSchema = z.object({
   email: z.string().email("Invalid email").trim(),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
@@ -62,4 +68,4 @@ export const updateProfileSchema = z.object({
 });
 
 export type RegisterUserForm = z.infer<typeof registerUserformSchema>;
-export type LoginUserForm = z.infer<typeof loginUserSchema>;
+export type LoginUserForm = z.infer<typeof loginUserFormSchema>;

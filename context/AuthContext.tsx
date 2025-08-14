@@ -1,5 +1,7 @@
 "use client";
 
+import { logoutSessionUser } from "@/actions/user";
+import { getSessionUser } from "@/data/user";
 import {
   createContext,
   useContext,
@@ -10,7 +12,7 @@ import {
 
 interface AuthContextType {
   user: any | null;
-  login: (userData: any) => void;
+  login: () => void;
   logout: () => void;
 }
 
@@ -18,22 +20,24 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<any | null>(null);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+  const updateSessionUser = async () => {
+    const storedUser = await getSessionUser();
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      setUser(storedUser);
     }
+  };
+  
+  useEffect(() => {
+    updateSessionUser();
   }, []);
 
-  const login = (userData: any) => {
-    localStorage.setItem("user", JSON.stringify(userData));
-    setUser(userData);
+  const login = () => {
+    updateSessionUser();
   };
 
-  const logout = () => {
-    localStorage.removeItem("user");
+  const logout = async () => {
     setUser(null);
+    await logoutSessionUser();
   };
 
   return (

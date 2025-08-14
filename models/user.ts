@@ -3,6 +3,7 @@ import { IUser } from "@/definitions/user";
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 interface UserDocument extends Document, IUser {
+  password: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -23,8 +24,9 @@ const UserSchema = new Schema<UserDocument>(
       unique: true,
       trim: true,
     },
-    passwordHash: { type: String, required: true },
+    password: { type: String, required: true },
     role: { type: String, enum: ["customer", "admin"], default: "customer" },
+    authType: { type: String, default: "credentials" },
     avatarUrl: { type: String },
   },
   { timestamps: true }

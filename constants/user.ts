@@ -1,10 +1,20 @@
 import { Key, User } from "lucide-react";
 
+export const CLIENT = "client";
+export const CREDENTIALS = "credentials";
 export const registerFormData = [
   {
-    name: "username",
-    label: "Username",
-    placeholder: "E.g johnDoe, johndoe@gmail.com, 061 234 5678, etc...",
+    name: "name",
+    label: "Full Name",
+    placeholder: "E.g John Doe",
+    Icon: User,
+    bgColour: "bg-gray-50",
+    isRequired: true,
+  },
+  {
+    name: "email",
+    label: "Email",
+    placeholder: "E.g johndoe@gmail.com",
     Icon: User,
     bgColour: "bg-gray-50",
     isRequired: true,
@@ -32,6 +42,27 @@ export const registerFormData = [
     type: "password",
     name: "confirmPassword",
     placeholder: "Confirm Password",
+    Icon: Key,
+    bgColour: "bg-gray-50",
+    isRequired: true,
+    isPassword: true,
+  },
+];
+
+export const loginFormData = [
+  {
+    name: "email",
+    label: "Email",
+    placeholder: "E.g johndoe@gmail.com",
+    Icon: User,
+    bgColour: "bg-gray-50",
+    isRequired: true,
+  },
+  {
+    label: "Password",
+    type: "password",
+    name: "password",
+    placeholder: "Password",
     Icon: Key,
     bgColour: "bg-gray-50",
     isRequired: true,
