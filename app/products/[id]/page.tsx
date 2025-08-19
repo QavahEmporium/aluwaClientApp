@@ -1,4 +1,4 @@
-import ProductDetails from "@/components/product/[id]/ProductDetails";
+import ProductDetails from "@/components/product/[id]/product-details";
 import { getProductById, listProducts } from "@/data/products";
 
 interface ProductPageProps {

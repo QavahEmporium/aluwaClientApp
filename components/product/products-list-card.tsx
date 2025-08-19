@@ -16,7 +16,7 @@ export function ProductCard({ product }: any) {
         className="relative aspect-square w-full"
       >
         <Image
-          src={product.image}
+          src={`/api/files/${product.imageUrl}`}
           alt={product.name}
           fill
           className="object-cover"
