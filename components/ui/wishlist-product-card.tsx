@@ -10,7 +10,7 @@ interface WishlistProductCardProps {
     id: number;
     name: string;
     price: number;
-    image: string;
+    imageUrl: string;
     category?: string;
   };
   onRemove: (id: number) => void;
@@ -30,7 +30,7 @@ export function WishlistProductCard({
         className="relative aspect-square w-full"
       >
         <Image
-          src={product.image}
+          src={product.imageUrl}
           alt={product.name}
           fill
           className="object-cover"
@@ -56,7 +56,7 @@ export function WishlistProductCard({
         </p>
 
         <Button
-          onClick={() => addToCart({ ...product, imageUrl: product.image })}
+          onClick={() => addToCart({ ...product, imageUrl: product.imageUrl })}
           className="w-full mb-2"
           size="sm"
         >

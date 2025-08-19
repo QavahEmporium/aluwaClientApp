@@ -59,13 +59,13 @@ export default function WishlistPage() {
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-          {wishlist.map((product) => (
+          {/* {wishlist.map((product) => (
             <WishlistProductCard
               key={product.id}
               product={product}
               onRemove={handleRemove}
             />
-          ))}
+          ))} */}
         </div>
       )}
     </>
