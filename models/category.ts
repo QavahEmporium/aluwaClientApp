@@ -1,9 +1,8 @@
 // src/models/Category.ts
 import { ICategory } from "@/definitions/product";
-import mongoose, { Schema, Document, Model, Types } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 
-interface CategoryDocument extends Document, Omit<ICategory, "parentId"> {
-  parentId?: Types.ObjectId | null;
+interface CategoryDocument extends Document, ICategory {
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -11,21 +10,13 @@ interface CategoryDocument extends Document, Omit<ICategory, "parentId"> {
 const CategorySchema = new Schema<CategoryDocument>(
   {
     name: { type: String, required: true, trim: true },
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
-    },
-    description: { type: String },
-    parentId: { type: Schema.Types.ObjectId, ref: "Category", default: null },
-    isActive: { type: Boolean, default: true },
+    description: { type: String, trim: true },
+    isPublished: { type: Boolean, default: false }, // 👈 new field
   },
   { timestamps: true }
 );
 
-CategorySchema.index({ slug: 1 }, { unique: true });
+CategorySchema.index({ name: "text", description: "text" });
 
 const Category: Model<CategoryDocument> =
   mongoose.models.Category ||

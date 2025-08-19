@@ -1,8 +1,11 @@
 // src/models/Product.ts
 import { IProduct } from "@/definitions/product";
 import mongoose, { Schema, Document, Model, Types } from "mongoose";
+import Category from "@/models/category"; // 👈 ensures schema is registered
 
-interface ProductDocument extends Document, Omit<IProduct, "categoryId"> {
+interface ProductDocument
+  extends Document,
+    Omit<IProduct, "categoryId" | "id"> {
   categoryId: Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
@@ -11,27 +14,17 @@ interface ProductDocument extends Document, Omit<IProduct, "categoryId"> {
 const ProductSchema = new Schema<ProductDocument>(
   {
     name: { type: String, required: true, trim: true },
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
-    },
     description: { type: String, required: true },
     price: { type: Number, required: true, min: 0 },
-    images: [{ type: String, required: true }],
-    sku: { type: String, index: true },
+    imageUrl: { type: String, required: true },
     stock: { type: Number, required: true, min: 0 },
-    status: { type: String, enum: ["active", "draft"], default: "active" },
     categoryId: {
       type: Schema.Types.ObjectId,
-      ref: "Category",
+      ref: Category.modelName,
       required: true,
       index: true,
     },
-    tags: [{ type: String }],
-    attributes: { type: Schema.Types.Mixed },
+    isPublished: { type: Boolean, default: false }, // 👈 new field
   },
   { timestamps: true }
 );

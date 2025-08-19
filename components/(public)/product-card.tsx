@@ -1,10 +1,8 @@
-// components/ui/product-card.tsx
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useCart } from "@/context/CartContext";
-import { Card, CardContent } from "./card";
+import { Card, CardContent } from "@/components/ui/card";
+import { AddToCartButton } from "../ui/buttons";
 
 interface ProductCardProps {
   product: any;
@@ -15,8 +13,6 @@ export function ProductCard({
   product,
   layout = "carousel",
 }: ProductCardProps) {
-  const { addToCart } = useCart();
-
   const baseClasses =
     layout === "carousel"
       ? "min-w-[220px] sm:min-w-[250px] md:min-w-[280px] flex-shrink-0"
@@ -33,7 +29,7 @@ export function ProductCard({
           className="relative w-full aspect-square mb-2"
         >
           <Image
-            src={product.image}
+            src={`/api/files/${product.imageUrl}`}
             alt={product.name}
             fill
             className="object-cover rounded"
@@ -60,13 +56,7 @@ export function ProductCard({
             ${product.price.toFixed(2)}
           </p>
 
-          <Button
-            onClick={() => addToCart(product)}
-            className="mt-auto w-full"
-            size="sm"
-          >
-            Add to Cart
-          </Button>
+          <AddToCartButton product={product} />
         </div>
       </CardContent>
     </Card>

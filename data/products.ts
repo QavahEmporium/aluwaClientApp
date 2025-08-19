@@ -1,185 +1,87 @@
-export const featuredProducts = [
-  {
-    id: 1,
-    name: "Premium Beard Oil",
-    price: 19.99,
-    image: "/images/beard-oil.jpg",
-    tag: "Best Seller",
-  },
-  {
-    id: 2,
-    name: "Matte Hair Clay",
-    price: 15.99,
-    image: "/images/hair-clay.jpg",
-    tag: "New",
-  },
-  {
-    id: 3,
-    name: "Beard Grooming Kit",
-    price: 39.99,
-    image: "/images/beard-kit.jpg",
-    tag: "Bundle",
-  },
-];
+"use server";
 
-export const products = [
-  // Beard
-  {
-    id: 1,
-    name: "Premium Beard Oil",
-    price: 19.99,
-    image: "/images/beard1.jpg",
-    category: "Beard",
-    tag: "Best Seller",
-    description:
-      "Keeps your beard soft, shiny, and healthy with all-natural ingredients.",
-  },
-  {
-    id: 2,
-    name: "Beard Grooming Kit",
-    price: 39.99,
-    image: "/images/beard2.jpg",
-    category: "Beard",
-    tag: "Bundle",
-    description: "Everything you need for daily beard maintenance in one kit.",
-  },
-  {
-    id: 3,
-    name: "Wooden Beard Comb",
-    price: 9.99,
-    image: "/images/beard3.jpg",
-    category: "Beard",
-    tag: "Essential",
-    description:
-      "Keeps your beard soft, shiny, and healthy with all-natural ingredients.",
-  },
-  {
-    id: 4,
-    name: "Beard Balm",
-    price: 14.99,
-    image: "/images/beard4.jpg",
-    category: "Beard",
-    tag: "New",
-    description: "Everything you need for daily beard maintenance in one kit.",
-  },
+import dbConnect from "@/lib/db";
+import Category from "@/models/category";
+import Product from "@/models/product";
+import mongoose from "mongoose";
 
-  // Hair
-  {
-    id: 5,
-    name: "Matte Hair Clay",
-    price: 15.99,
-    image: "/images/hair1.jpg",
-    category: "Hair",
-    tag: "New",
-    description:
-      "Keeps your beard soft, shiny, and healthy with all-natural ingredients.",
-  },
-  {
-    id: 6,
-    name: "Hydrating Shampoo",
-    price: 12.99,
-    image: "/images/hair2.jpg",
-    category: "Hair",
-    tag: "Organic",
-    description: "Everything you need for daily beard maintenance in one kit.",
-  },
-  {
-    id: 7,
-    name: "Volumizing Hair Powder",
-    price: 17.99,
-    image: "/images/hair3.jpg",
-    category: "Hair",
-    tag: "Trending",
-    description:
-      "Keeps your beard soft, shiny, and healthy with all-natural ingredients.",
-  },
-  {
-    id: 8,
-    name: "Hair Styling Wax",
-    price: 16.99,
-    image: "/images/hair4.jpg",
-    category: "Hair",
-    tag: "Popular",
-    description: "Everything you need for daily beard maintenance in one kit.",
-  },
+export async function listProducts(query?: {
+  categoryId?: string;
+  q?: string;
+}) {
+  await dbConnect();
+  const filter: any = {};
+  if (query?.categoryId)
+    filter.categoryId = new mongoose.Types.ObjectId(query.categoryId);
+  if (query?.q) filter.$text = { $search: query.q };
 
-  // Grooming Tools
-  {
-    id: 9,
-    name: "Electric Beard Trimmer",
-    price: 49.99,
-    image: "/images/groom1.jpg",
-    category: "Grooming Tools",
-    tag: "Top Rated",
-    description:
-      "Keeps your beard soft, shiny, and healthy with all-natural ingredients.",
-  },
-  {
-    id: 10,
-    name: "Precision Scissors",
-    price: 19.99,
-    image: "/images/groom2.jpg",
-    category: "Grooming Tools",
-    tag: "Essential",
-    description: "Everything you need for daily beard maintenance in one kit.",
-  },
-  {
-    id: 11,
-    name: "Shaving Brush",
-    price: 12.99,
-    image: "/images/groom3.jpg",
-    category: "Grooming Tools",
-    tag: "Classic",
-    description:
-      "Keeps your beard soft, shiny, and healthy with all-natural ingredients.",
-  },
-  {
-    id: 12,
-    name: "Straight Razor",
-    price: 29.99,
-    image: "/images/groom4.jpg",
-    category: "Grooming Tools",
-    tag: "Barber's Choice",
-    description: "Everything you need for daily beard maintenance in one kit.",
-  },
+  const products = (await Product.find(filter)
+    .populate("categoryId", "name") // populate only `name` field from Category
+    .sort({ createdAt: -1 })
+    .lean()) as any[];
 
-  // Bundles
-  {
-    id: 13,
-    name: "Complete Grooming Bundle",
-    price: 59.99,
-    image: "/images/kit1.jpg",
-    category: "Bundles",
-    tag: "Value Pack",
-    description:
-      "Keeps your beard soft, shiny, and healthy with all-natural ingredients.",
-  },
-  {
-    id: 14,
-    name: "Beard & Hair Styling Kit",
-    price: 44.99,
-    image: "/images/kit2.jpg",
-    category: "Bundles",
-    tag: "Gift Idea",
-    description: "Everything you need for daily beard maintenance in one kit.",
-  },
-  {
-    id: 15,
-    name: "Ultimate Barber Set",
-    price: 89.99,
-    image: "/images/kit3.jpg",
-    category: "Bundles",
-    tag: "Professional",
-    description:
-      "Keeps your beard soft, shiny, and healthy with all-natural ingredients.",
-  },
-  {
-    id: 16,
-    name: "Travel Grooming Kit",
-    price: 34.99,
-    image: "/images/kit4.jpg",
-    category: "Bundles",
-    tag: "Portable",
-    description: "Everything you need for daily beard maintenance in one kit.",
-  },
-];
+  return products.map((p) => ({
+    id: p._id.toString(),
+    category: p.categoryId?.name || "", // populated field
+    categoryId: p.categoryId?._id?.toString() || "",
+    name: p.name,
+    description: p.description,
+    price: p.price,
+    imageUrl: p.imageUrl,
+    stock: p.stock,
+    isPublished: p.isPublished,
+  }));
+}
+
+export async function getProductById(id: string) {
+  await dbConnect();
+  const product = (await Product.findById(id).lean()) as any;
+
+  return {
+    id: product._id.toString(),
+    category: product.categoryId?.name || "", // populated field
+    categoryId: product.categoryId?._id?.toString() || "",
+    name: product.name,
+    description: product.description,
+    price: product.price,
+    imageUrl: product.imageUrl,
+    stock: product.stock,
+    isPublished: product.isPublished,
+  };
+}
+
+export const landingPageProducts = async () => {
+  await dbConnect();
+
+  const cats = await Category.find({ isPublished: true }).lean();
+
+  const categories = await Promise.all(
+    cats.map(async (cat) => {
+      const products = await Product.find({
+        categoryId: cat._id,
+        isPublished: true,
+      })
+        .limit(10)
+        .lean();
+
+      return {
+        id: cat._id.toString(),
+        name: cat.name,
+        description: cat.description,
+        isPublished: cat.isPublished,
+        products: products.map((p) => ({
+          id: p._id.toString(),
+          name: p.name,
+          category: cat.name,
+          description: p.description,
+          price: p.price,
+          imageUrl: p.imageUrl,
+          stock: p.stock,
+          isPublished: p.isPublished,
+        })),
+      };
+    })
+  );
+
+  return categories;
+};

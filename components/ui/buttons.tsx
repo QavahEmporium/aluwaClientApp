@@ -1,4 +1,7 @@
+"use client";
+import { useCart } from "@/context/CartContext";
 import { LoaderCircle } from "lucide-react";
+import { Button } from "./button";
 
 export const SubmitButton = ({
   name,
@@ -25,5 +28,18 @@ export const SubmitButton = ({
         </button>
       )}
     </div>
+  );
+};
+
+export const AddToCartButton = ({ product }: { product: any }) => {
+  const { addToCart } = useCart();
+  return (
+    <Button
+      onClick={() => addToCart(product)}
+      className="mt-auto w-full"
+      size="sm"
+    >
+      Add to Cart
+    </Button>
   );
 };
