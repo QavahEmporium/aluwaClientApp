@@ -5,12 +5,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
-import { products } from "@/constants/products";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { ChevronLeft } from "lucide-react";
 
-export default function ProductDetails({ id }: { id: string }) {
-  const product = products.find((p) => p.id === Number(id));
+export default function ProductDetails({ product }: { product: any }) {
   const { addToCart } = useCart();
   const router = useRouter();
 
@@ -42,7 +40,7 @@ export default function ProductDetails({ id }: { id: string }) {
         {/* Image Carousel */}
         <div className="relative w-full md:w-1/2 aspect-square rounded-lg overflow-hidden border border-black">
           <Image
-            src={images[currentImageIndex]}
+            src={`/api/files/${product.imageUrl}`}
             alt={product.name}
             fill
             className="object-cover"
@@ -78,7 +76,7 @@ export default function ProductDetails({ id }: { id: string }) {
 
           <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
             <p className="text-2xl font-semibold mb-4 sm:mb-0">
-              ${product.price.toFixed(2)}
+              R{product.price.toFixed(2)}
             </p>
 
             {/* Quantity selector */}
@@ -97,7 +95,7 @@ export default function ProductDetails({ id }: { id: string }) {
             {/* Add to Cart button */}
             <Button
               onClick={() =>
-                addToCart({ ...product, imageUrl: product.image }, quantity)
+                addToCart({ ...product, imageUrl: product.imageUrl }, quantity)
               }
               className="mt-4 sm:mt-0 w-full sm:w-auto"
             >

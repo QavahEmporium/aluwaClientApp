@@ -53,7 +53,7 @@ export function ProductCard({
           <Badge className="mb-2 w-fit">{product.category}</Badge>
 
           <p className="font-bold text-sm sm:text-lg mb-4">
-            ${product.price.toFixed(2)}
+            R{product.price.toFixed(2)}
           </p>
 
           <AddToCartButton product={product} />

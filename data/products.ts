@@ -14,6 +14,7 @@ export async function listProducts(query?: {
   if (query?.categoryId)
     filter.categoryId = new mongoose.Types.ObjectId(query.categoryId);
   if (query?.q) filter.$text = { $search: query.q };
+  filter.isPublished = true;
 
   const products = (await Product.find(filter)
     .populate("categoryId", "name") // populate only `name` field from Category
