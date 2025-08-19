@@ -96,7 +96,9 @@ export default function ProductDetails({ id }: { id: string }) {
             </div>
             {/* Add to Cart button */}
             <Button
-              onClick={() => addToCart(product, quantity)}
+              onClick={() =>
+                addToCart({ ...product, imageUrl: product.image }, quantity)
+              }
               className="mt-4 sm:mt-0 w-full sm:w-auto"
             >
               Add to Cart

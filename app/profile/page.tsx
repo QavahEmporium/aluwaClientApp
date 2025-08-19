@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ProductCard } from "@/components/ui/product-card";
+import { ProductCard } from "@/components/(public)/product-card";
 import { useCart } from "@/context/CartContext";
 
 // Mock data
@@ -139,7 +139,7 @@ export default function UserProfilePage() {
                     <Button
                       size="sm"
                       className="flex-1"
-                      onClick={() => addToCart(product)}
+                      onClick={() => addToCart({ ...product, imageUrl: product.image })}
                     >
                       Add to Cart
                     </Button>

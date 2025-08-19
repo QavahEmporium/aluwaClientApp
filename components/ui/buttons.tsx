@@ -35,7 +35,7 @@ export const AddToCartButton = ({ product }: { product: any }) => {
   const { addToCart } = useCart();
   return (
     <Button
-      onClick={() => addToCart(product)}
+      onClick={() => addToCart({ ...product, imageUrl: product.image })}
       className="mt-auto w-full"
       size="sm"
     >

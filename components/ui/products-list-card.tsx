@@ -40,7 +40,7 @@ export function ProductCard({ product }: any) {
         </p>
 
         <Button
-          onClick={() => addToCart(product)}
+          onClick={() => addToCart({ ...product, imageUrl: product.image })}
           className="mt-auto w-full"
           size="sm"
         >

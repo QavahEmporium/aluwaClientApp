@@ -56,7 +56,7 @@ export function WishlistProductCard({
         </p>
 
         <Button
-          onClick={() => addToCart(product)}
+          onClick={() => addToCart({ ...product, imageUrl: product.image })}
           className="w-full mb-2"
           size="sm"
         >

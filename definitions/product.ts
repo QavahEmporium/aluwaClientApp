@@ -44,3 +44,21 @@ export type ProductFormState = {
   };
   message: string;
 };
+
+// src/definitions/IProductVariant.ts
+export type IProductVariant = {
+  productId: string;
+  name: string; // e.g., "Size"
+  value: string; // e.g., "100ml"
+  priceAdjustment?: number; // +/- price
+  stock?: number; // optional per variant stock
+  sku?: string;
+};
+
+// src/definitions/IReview.ts
+export type IReview = {
+  userId: string;
+  productId: string;
+  rating: number; // 1..5
+  comment?: string;
+};
