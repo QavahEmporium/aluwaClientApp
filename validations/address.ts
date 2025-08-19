@@ -18,3 +18,14 @@ export const addressSchema = z.object({
 });
 
 export type AddressInput = z.infer<typeof addressSchema>;
+
+export const checkoutFormSchema = z.object({
+  name: z.string().min(2, "Name is required"),
+  email: z.string().email("Invalid email"),
+  address: z.string().min(5, "Address is required"),
+  city: z.string().min(2, "City is required"),
+  postalCode: z.string().min(4, "Postal code is required"),
+  country: z.string().min(2, "Country is required"),
+});
+
+export type CheckoutFormData = z.infer<typeof checkoutFormSchema>;

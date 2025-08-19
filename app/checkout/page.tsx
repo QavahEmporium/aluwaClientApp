@@ -1,36 +1,56 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRef, startTransition, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useActionState } from "react";
+import { checkoutFormSchema, CheckoutFormData } from "@/validations/address";
+import { checkoutFormData } from "@/constants/address";
+import InputValidated from "@/components/ui/input-validated";
+import { SubmitButton } from "@/components/ui/buttons";
+import { createOrderAction } from "@/actions/order";
 import { useCart } from "@/context/CartContext";
-import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
-export default function CheckoutPage() {
+const CheckoutForm = () => {
+  const initialState = {
+    message: "",
+    errors: {},
+  };
+  const pathname = "/order-confirmation";
   const { cart } = useCart();
+  const { user } = useAuth();
   const router = useRouter();
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    address: "",
-    city: "",
-    postalCode: "",
-    country: "",
-    cardNumber: "",
-    expiry: "",
-    cvc: "",
+  const createOrderActionWithParams = createOrderAction.bind(
+    null,
+    pathname,
+    cart
+  );
+
+  const [state, formAction, isPending] = useActionState(
+    createOrderActionWithParams,
+    initialState
+  );
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CheckoutFormData>({
+    resolver: zodResolver(checkoutFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      address: "",
+      city: "",
+      postalCode: "",
+      country: "",
+    },
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Mock submit: could add validation here
-    alert("Order placed! Thank you.");
-    router.push("/order-confirmation");
-  };
+  const formRef = useRef<HTMLFormElement>(null);
 
   if (cart.length === 0) {
     return (
@@ -41,7 +61,6 @@ export default function CheckoutPage() {
   }
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
     if (!user) {
       router.push("/login?redirect=/checkout");
     }
@@ -51,109 +70,36 @@ export default function CheckoutPage() {
     <main className="min-h-screen bg-white text-black p-6 pt-[64px] pb-[72px] max-w-lg mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-center">Checkout</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Shipping */}
-        <section>
-          <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
-          <input
-            name="name"
-            type="text"
-            placeholder="Full Name"
-            value={form.name}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-black"
-          />
-          <input
-            name="email"
-            type="email"
-            placeholder="Email Address"
-            value={form.email}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-black"
-          />
-          <input
-            name="address"
-            type="text"
-            placeholder="Street Address"
-            value={form.address}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-black"
-          />
-          <div className="flex md:flex-row flex-col gap-3">
-            <input
-              name="city"
-              type="text"
-              placeholder="City"
-              value={form.city}
-              onChange={handleChange}
-              required
-              className="flex-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+      <form
+        ref={formRef}
+        onSubmit={(evt) => {
+          evt.preventDefault();
+          handleSubmit(() => {
+            const formData = new FormData(formRef.current!);
+            startTransition(() => {
+              formAction(formData);
+            });
+          })(evt);
+        }}
+        className="flex flex-col items-center"
+      >
+        <div className="w-full mb-4">
+          {checkoutFormData.map((data) => (
+            <InputValidated
+              key={data.name}
+              {...data}
+              register={register}
+              errors={errors}
+              isPending={isPending}
+              stateError={state?.errors}
             />
-            <input
-              name="postalCode"
-              type="text"
-              placeholder="Postal Code"
-              value={form.postalCode}
-              onChange={handleChange}
-              required
-              className="flex-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
-            />
-          </div>
-          <input
-            name="country"
-            type="text"
-            placeholder="Country"
-            value={form.country}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-md mt-3 focus:outline-none focus:ring-2 focus:ring-black"
-          />
-        </section>
+          ))}
+        </div>
 
-        {/* Payment */}
-        <section>
-          <h2 className="text-xl font-semibold mb-4">Payment Details</h2>
-          <input
-            name="cardNumber"
-            type="text"
-            placeholder="Card Number"
-            maxLength={19}
-            value={form.cardNumber}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-black"
-          />
-          <div className="flex gap-3">
-            <input
-              name="expiry"
-              type="text"
-              placeholder="MM/YY"
-              maxLength={5}
-              value={form.expiry}
-              onChange={handleChange}
-              required
-              className="flex-initial w-2/3 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
-            />
-            <input
-              name="cvc"
-              type="text"
-              placeholder="CVC"
-              maxLength={4}
-              value={form.cvc}
-              onChange={handleChange}
-              required
-              className="flex-initial w-1/3 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
-            />
-          </div>
-        </section>
-
-        <Button type="submit" className="w-full py-3 text-lg font-semibold">
-          Place Order
-        </Button>
+        <SubmitButton name="Place Order" isPending={isPending} />
       </form>
     </main>
   );
-}
+};
+
+export default CheckoutForm;

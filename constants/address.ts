@@ -1,0 +1,51 @@
+// data/checkoutFormData.ts
+export const checkoutFormData = [
+  {
+    name: "name",
+    label: "Full Name",
+    type: "text",
+    placeholder: "John Doe",
+    bgColour: "bg-gray-50",
+    isRequired: true,
+  },
+  {
+    name: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "john@example.com",
+    bgColour: "bg-gray-50",
+    isRequired: true,
+  },
+  {
+    name: "address",
+    label: "Address",
+    type: "text",
+    placeholder: "123 Main St",
+    bgColour: "bg-gray-50",
+    isRequired: true,
+  },
+  {
+    name: "city",
+    label: "City",
+    type: "text",
+    placeholder: "Cape Town",
+    bgColour: "bg-gray-50",
+    isRequired: true,
+  },
+  {
+    name: "postalCode",
+    label: "Postal Code",
+    type: "text",
+    placeholder: "8000",
+    bgColour: "bg-gray-50",
+    isRequired: true,
+  },
+  {
+    name: "country",
+    label: "Country",
+    type: "text",
+    placeholder: "South Africa",
+    bgColour: "bg-gray-50",
+    isRequired: true,
+  },
+];

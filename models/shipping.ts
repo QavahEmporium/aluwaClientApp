@@ -1,46 +1,36 @@
-// src/models/Shipping.ts
-import { IShipping } from "@/definitions/order";
-import mongoose, { Schema, Document, Model, Types } from "mongoose";
+// src/models/ShippingAddress.ts
+import mongoose, { Schema, Document, Model } from "mongoose";
 
-interface ShippingDocument
-  extends Document,
-    Omit<IShipping, "orderId" | "estimatedDelivery"> {
-  orderId: Types.ObjectId;
-  estimatedDelivery?: Date;
+export interface ShippingAddressDocument extends Document {
+  userId: mongoose.Types.ObjectId;
+  name: string;
+  email: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-const ShippingSchema = new Schema<ShippingDocument>(
+const ShippingAddressSchema = new Schema<ShippingAddressDocument>(
   {
-    orderId: {
-      type: Schema.Types.ObjectId,
-      ref: "Order",
-      required: true,
-      unique: true,
-      index: true,
-    },
-    carrier: { type: String },
-    trackingNumber: { type: String, index: true },
-    status: {
-      type: String,
-      enum: [
-        "label_created",
-        "in_transit",
-        "out_for_delivery",
-        "delivered",
-        "exception",
-      ],
-      default: "label_created",
-      index: true,
-    },
-    estimatedDelivery: { type: Date },
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    address: { type: String, required: true },
+    city: { type: String, required: true },
+    postalCode: { type: String, required: true },
+    country: { type: String, required: true },
   },
   { timestamps: true }
 );
 
-const Shipping: Model<ShippingDocument> =
-  mongoose.models.Shipping ||
-  mongoose.model<ShippingDocument>("Shipping", ShippingSchema);
+const ShippingAddress: Model<ShippingAddressDocument> =
+  mongoose.models.ShippingAddress ||
+  mongoose.model<ShippingAddressDocument>(
+    "ShippingAddress",
+    ShippingAddressSchema
+  );
 
-export default Shipping;
+export default ShippingAddress;

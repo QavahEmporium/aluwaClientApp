@@ -47,7 +47,7 @@ export default function CartPage() {
                 <div>
                   <h2 className="text-lg font-semibold">{item.name}</h2>
                   <p className="text-sm text-gray-600">
-                    ${item.price.toFixed(2)}
+                    R {item.price.toFixed(2)}
                   </p>
                 </div>
 
@@ -77,7 +77,7 @@ export default function CartPage() {
       {cart.length > 0 && (
         <div className="mt-8 border-t pt-4">
           <p className="text-xl font-semibold">
-            Subtotal: ${subtotal.toFixed(2)}
+            Subtotal: R {subtotal.toFixed(2)}
           </p>
           <Button
             className="w-full mt-4"

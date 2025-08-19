@@ -42,7 +42,7 @@ export function CartDrawer() {
               <div className="flex-1">
                 <h3 className="text-sm font-medium">{item.name}</h3>
                 <p className="text-xs text-gray-500">
-                  ${item.price.toFixed(2)}
+                  R {item.price.toFixed(2)}
                 </p>
                 <div className="flex items-center gap-2 mt-1">
                   <Button
@@ -76,13 +76,13 @@ export function CartDrawer() {
 
       {cart.length > 0 && (
         <div className="p-4 border-t border-gray-200">
-          <p className="font-semibold mb-3">Total: ${total.toFixed(2)}</p>
+          <p className="font-semibold mb-3">Total: R {total.toFixed(2)}</p>
           <div className="flex flex-col gap-y-2">
             <Button
-              onClick={() => route.push("/checkout")}
+              onClick={() => route.push("/cart")}
               className="w-full bg-black text-white hover:bg-gray-800"
             >
-              Checkout
+              Proceed to Cart
             </Button>{" "}
             <Button
               onClick={() => closeCart()}

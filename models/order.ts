@@ -1,55 +1,32 @@
 // src/models/Order.ts
-import { IOrder } from "@/definitions/order";
-import mongoose, { Schema, Document, Model, Types } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 
-interface OrderDocument
-  extends Document,
-    Omit<IOrder, "userId" | "shippingAddressId" | "billingAddressId"> {
-  userId: Types.ObjectId;
-  shippingAddressId: Types.ObjectId;
-  billingAddressId?: Types.ObjectId;
+export interface OrderDocument extends Document {
+  userId: mongoose.Types.ObjectId;
+  shippingAddressId: mongoose.Types.ObjectId;
+  totalAmount: number;
+  status: "pending" | "paid" | "shipped" | "delivered" | "cancelled";
   createdAt?: Date;
   updatedAt?: Date;
 }
 
 const OrderSchema = new Schema<OrderDocument>(
   {
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-      index: true,
-    },
-    orderNumber: { type: String, required: true, unique: true },
-    status: {
-      type: String,
-      enum: [
-        "pending",
-        "paid",
-        "shipped",
-        "delivered",
-        "cancelled",
-        "refunded",
-      ],
-      default: "pending",
-      index: true,
-    },
-    subtotal: { type: Number, required: true, min: 0 },
-    shippingCost: { type: Number, required: true, min: 0 },
-    tax: { type: Number, required: true, min: 0 },
-    total: { type: Number, required: true, min: 0 },
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     shippingAddressId: {
       type: Schema.Types.ObjectId,
-      ref: "Address",
+      ref: "ShippingAddress",
       required: true,
     },
-    billingAddressId: { type: Schema.Types.ObjectId, ref: "Address" },
-    notes: { type: String },
+    totalAmount: { type: Number, required: true, min: 0 },
+    status: {
+      type: String,
+      enum: ["pending", "paid", "shipped", "delivered", "cancelled"],
+      default: "pending",
+    },
   },
   { timestamps: true }
 );
-
-OrderSchema.index({ orderNumber: 1 }, { unique: true });
 
 const Order: Model<OrderDocument> =
   mongoose.models.Order || mongoose.model<OrderDocument>("Order", OrderSchema);
