@@ -8,11 +8,8 @@ import {
 import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 import { createSession, deleteSession } from "@/lib/session";
-import dbConnect from "@/lib/db";
-import User from "@/models/user";
-import { getUser } from "@/data/user";
-// import { createUser, updateExistingUser } from "./user";
-// import { getUser, isUserExists } from "@/data/user";
+import { getUser, isUserExists } from "@/data/user";
+import { createUser } from "@/services/user";
 
 export async function regsiterUser(
   pathname: string,
@@ -105,33 +102,3 @@ export async function logoutSessionUser() {
   await deleteSession();
   redirect("/");
 }
-
-const createUser = async (
-  name: string,
-  email: string,
-  password: string,
-  contactNumber: string
-) => {
-  await dbConnect();
-
-  const user = User.create({
-    name,
-    email,
-    password,
-    contactNumber,
-  });
-
-  return user;
-};
-
-const isUserExists = async (email: string) => {
-  try {
-    await dbConnect();
-    const user = await getUser({ email });
-
-    return !!user;
-  } catch (error) {
-    console.log("Failed to fetch user");
-    return null;
-  }
-};
