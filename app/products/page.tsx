@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { products } from "@/data/products";
+import { products } from "@/constants/products";
 import { ProductCard } from "@/components/ui/products-list-card";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/ui/page-header";

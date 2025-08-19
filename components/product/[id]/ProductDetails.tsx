@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
-import { products } from "@/data/products";
+import { products } from "@/constants/products";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { ChevronLeft } from "lucide-react";
 
