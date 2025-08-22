@@ -15,22 +15,23 @@ export const getSessionUser = cache(async () => {
   if (!session) return null;
 
   const userId = session?.userId as string;
-  const { name, username, contactNumber } = (await User.findById(
+  const user = (await User.findById(
     userId,
     "name username contactNumber"
   )) as any;
-
+  if (!user) return null;
+  
+  const { name, username, contactNumber } = user;
   return { name, username, contactNumber };
 });
 
-export const isUserExists = async (username: string) => {
+export const isUserExists = async (userDetail: any) => {
   try {
     await dbConnect();
-    const user = await getUser({ username });
+    const user = await getUser(userDetail);
 
     return !!user;
   } catch (error) {
-    console.log("Failed to fetch user");
     return null;
   }
 };

@@ -31,10 +31,22 @@ export async function regsiterUser(
   const { name, email, password, contactNumber } = validatedFields.data;
 
   try {
-    const isUserExist = await isUserExists(email);
+    const isUserExist = await isUserExists({ email });
     if (isUserExist) {
       const state: RegisterUserState = {
-        errors: { email: ["User already exists"] },
+        errors: { email: ["Email already exists"] },
+      };
+      return state;
+    }
+  } catch (error) {
+    throw new Error("Error fetching user:" + error);
+  }
+
+  try {
+    const isUserExist = await isUserExists({ contactNumber });
+    if (isUserExist) {
+      const state: RegisterUserState = {
+        errors: { email: ["Contact Number already exists"] },
       };
       return state;
     }
