@@ -51,6 +51,26 @@ export async function getProductById(id: string) {
   };
 }
 
+export async function getProductByCategory(categoryId: string) {
+  await dbConnect();
+  const products = (await Product.find({ categoryId, isPublished: true })
+    .populate("categoryId", "name")
+    .sort({ createdAt: -1 })
+    .lean()) as any[];
+
+  return products.map((p) => ({
+    id: p._id.toString(),
+    category: p.categoryId?.name || "",
+    categoryId: p.categoryId?._id?.toString() || "",
+    name: p.name,
+    description: p.description,
+    price: p.price,
+    imageUrl: p.imageUrl,
+    stock: p.stock,
+    isPublished: p.isPublished,
+  }));
+}
+
 export const landingPageProducts = async () => {
   await dbConnect();
 
@@ -74,6 +94,7 @@ export const landingPageProducts = async () => {
           id: p._id.toString(),
           name: p.name,
           category: cat.name,
+          categoryId: cat._id.toString(),
           description: p.description,
           price: p.price,
           imageUrl: p.imageUrl,
@@ -86,3 +107,33 @@ export const landingPageProducts = async () => {
 
   return categories;
 };
+
+export async function listRelatedProducts(
+  productId: string,
+  categoryId: string
+) {
+  await dbConnect();
+
+  const filter: any = {
+    categoryId: new mongoose.Types.ObjectId(categoryId),
+    _id: { $ne: new mongoose.Types.ObjectId(productId) }, // exclude current product
+  };
+
+  const products = (await Product.find(filter)
+    .populate("categoryId", "name")
+    .sort({ createdAt: -1 })
+    .limit(8) // limit related products
+    .lean()) as any[];
+
+  return products.map((p) => ({
+    id: p._id.toString(),
+    category: p.categoryId?.name || "",
+    categoryId: p.categoryId?._id?.toString() || "",
+    name: p.name,
+    description: p.description,
+    price: p.price,
+    imageUrl: p.imageUrl,
+    stock: p.stock,
+    isPublished: p.isPublished,
+  }));
+}

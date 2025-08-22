@@ -7,14 +7,12 @@ import { useCart } from "@/context/CartContext";
 
 export function ProductCard({ product }: any) {
   const { addToCart } = useCart();
+  const url = `/products/${product.id}/${product.categoryId}`;
 
   return (
     <div className="flex flex-col border border-black rounded-lg overflow-hidden w-full h-full">
       {/* Image */}
-      <Link
-        href={`/products/${product.id}`}
-        className="relative aspect-square w-full"
-      >
+      <Link href={url} className="relative aspect-square w-full">
         <Image
           src={`/api/files/${product.imageUrl}`}
           alt={product.name}
@@ -27,7 +25,7 @@ export function ProductCard({ product }: any) {
 
       {/* Content */}
       <div className="p-4 flex flex-col flex-1">
-        <Link href={`/products/${product.id}`} className="hover:underline">
+        <Link href={url} className="hover:underline">
           <h3 className="text-base sm:text-lg font-semibold mb-1">
             {product.name}
           </h3>
