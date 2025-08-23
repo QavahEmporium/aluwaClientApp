@@ -19,7 +19,7 @@ export function ProductCard({ product }: any) {
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          priority
+          loading="lazy"
         />
       </Link>
 

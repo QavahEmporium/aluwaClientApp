@@ -39,7 +39,7 @@ export default function CartPage() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 640px) 80px, 96px"
-                  priority
+                  loading="lazy"
                 />
               </div>
 

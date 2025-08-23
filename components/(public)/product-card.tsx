@@ -37,7 +37,7 @@ export function ProductCard({
                 ? "(max-width: 768px) 220px, (max-width: 1024px) 250px, 280px"
                 : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
             }
-            priority
+            loading="lazy"
           />
         </Link>
 
