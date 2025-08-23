@@ -1,25 +1,35 @@
 // components/ui/product-card.tsx
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/context/CartContext";
 
 export function ProductCard({ product }: any) {
   const { addToCart } = useCart();
+  const [imageLoaded, setImageLoaded] = useState(false);
   const url = `/products/${product.id}/${product.categoryId}`;
 
   return (
     <div className="flex flex-col border border-black rounded-lg overflow-hidden w-full h-full">
       {/* Image */}
-      <Link href={url} className="relative aspect-square w-full">
+      <Link href={url} className="relative aspect-square w-full block">
+        {/* Loader (shimmer box) */}
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+        )}
+
         <Image
           src={`/api/files/${product.imageUrl}`}
           alt={product.name}
           fill
-          className="object-cover"
+          className={`object-cover transition-opacity duration-300 ${
+            imageLoaded ? "opacity-100" : "opacity-0"
+          }`}
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
           loading="lazy"
+          onLoad={() => setImageLoaded(true)}
         />
       </Link>
 
