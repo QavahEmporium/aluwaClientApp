@@ -32,8 +32,8 @@ export default function ProductListing({
             onClick={() => setSelectedCategory(cat)}
             className={`whitespace-nowrap text-sm px-4 py-2 rounded-full ${
               selectedCategory === cat
-                ? "bg-black text-white hover:bg-black/90"
-                : "bg-white text-black hover:bg-gray-100 border"
+                ? "bg-emperor-950 text-white hover:bg-emperor-950/90"
+                : "bg-white text-emperor-950 hover:bg-emperor-100 border"
             }`}
           >
             {cat}
@@ -43,7 +43,7 @@ export default function ProductListing({
 
       {/* Product Grid */}
       {filteredProducts.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-8 gap-x-4">
           {filteredProducts.map((product: any) => (
             <div key={product.id} className="flex flex-col">
               <ProductCard product={product} />

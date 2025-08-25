@@ -12,7 +12,7 @@ export function ProductCard({ product }: any) {
   const url = `/products/${product.id}/${product.categoryId}`;
 
   return (
-    <div className="flex flex-col border border-black rounded-lg overflow-hidden w-full h-full">
+    <div className="flex flex-col border shadow-lg shadow-rose-bud-200 rounded-lg overflow-hidden w-full h-full">
       {/* Image */}
       <Link href={url} className="relative aspect-square w-full block">
         {/* Loader (shimmer box) */}
@@ -34,22 +34,24 @@ export function ProductCard({ product }: any) {
       </Link>
 
       {/* Content */}
-      <div className="p-4 flex flex-col flex-1">
+      <div className="p-2 md:p-4 flex flex-col flex-1">
         <Link href={url} className="hover:underline">
-          <h3 className="text-base sm:text-lg font-semibold mb-1">
+          <h3 className="text-rose-bud-500 text-base sm:text-lg font-semibold mb-1">
             {product.name}
           </h3>
         </Link>
 
-        <Badge className="mb-2 w-fit">{product.category}</Badge>
+        <Badge className="bg-emperor-950 text-white mb-2 w-fit">
+          {product.category}
+        </Badge>
 
-        <p className="font-bold text-sm sm:text-lg mb-4">
-          ${product.price.toFixed(2)}
+        <p className="text-rose-bud-500 font-bold text-sm sm:text-lg mb-4">
+          R{product.price.toFixed(2)}
         </p>
 
         <Button
           onClick={() => addToCart(product)}
-          className="mt-auto w-full"
+          className="bg-emperor-950 text-white mt-auto w-full"
           size="sm"
         >
           Add to Cart

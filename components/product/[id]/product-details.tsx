@@ -47,7 +47,7 @@ export default function ProductDetails({
       {/* Product Details */}
       <div className="flex flex-col md:flex-row gap-10">
         {/* Image Carousel */}
-        <div className="relative w-full md:w-1/2 aspect-square rounded-lg overflow-hidden border border-black">
+        <div className="relative w-full md:w-1/2 aspect-square rounded-lg overflow-hidden shadow-lg shadow-rose-bud-200">
           <Image
             src={`/api/files/${product.imageUrl}`}
             alt={product.name}
@@ -79,12 +79,16 @@ export default function ProductDetails({
         {/* Product Info */}
         <div className="flex flex-col justify-between md:w-1/2">
           <div>
-            <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-            <p className="text-gray-700 mb-6">{product.description}</p>
+            <h1 className="text-rose-bud-500 text-3xl font-bold mb-4">
+              {product.name}
+            </h1>
+            <p className="text-emperor-900 text-gray-700 mb-6">
+              {product.description}
+            </p>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
-            <p className="text-2xl font-semibold mb-4 sm:mb-0">
+            <p className="text-rose-bud-500 text-2xl font-semibold mb-4 sm:mb-0">
               R{product.price.toFixed(2)}
             </p>
 
@@ -92,12 +96,17 @@ export default function ProductDetails({
             <div className="flex items-center rounded-xl p-1 border border-gray-300 w-28">
               <Button
                 size="sm"
+                className="bg-emperor-950 text-white"
                 onClick={() => setQuantity((q) => (q > 1 ? q - 1 : 1))}
               >
                 -
               </Button>
               <span className="flex-1 text-center">{quantity}</span>
-              <Button size="sm" onClick={() => setQuantity((q) => q + 1)}>
+              <Button
+                size="sm"
+                className="bg-emperor-950 text-white"
+                onClick={() => setQuantity((q) => q + 1)}
+              >
                 +
               </Button>
             </div>
@@ -107,7 +116,7 @@ export default function ProductDetails({
               onClick={() =>
                 addToCart({ ...product, imageUrl: product.imageUrl }, quantity)
               }
-              className="mt-4 sm:mt-0 w-full sm:w-auto"
+              className="mt-4 sm:mt-0 w-full sm:w-auto bg-emperor-950 text-white"
             >
               Add to Cart
             </Button>
@@ -117,10 +126,12 @@ export default function ProductDetails({
 
       {/* Related Products */}
       <section className="my-16">
-        <h2 className="text-xl font-semibold mb-6">Related Products</h2>
+        <h2 className="text-emperor-900 text-xl font-semibold mb-6">
+          Related Products
+        </h2>
 
         {relatedProducts.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 md:gap-6 gap-y-6 gap-x-4">
             {relatedProducts.map((item) => (
               <div key={item.id} className="flex flex-col">
                 <ProductCard product={item} />

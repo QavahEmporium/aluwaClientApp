@@ -31,7 +31,7 @@ export function CartDrawer() {
         ) : (
           cart.map((item) => (
             <div key={item.id} className="flex items-center gap-3">
-              <div className="relative w-14 h-14 rounded overflow-hidden">
+              <div className="relative w-14 h-14 rounded overflow-hidden shadow-lg shadow-rose-bud-200">
                 <Image
                   src={`/api/files/${item.imageUrl}`}
                   alt={item.name}
@@ -40,14 +40,17 @@ export function CartDrawer() {
                 />
               </div>
               <div className="flex-1">
-                <h3 className="text-sm font-medium">{item.name}</h3>
-                <p className="text-xs text-gray-500">
+                <h3 className="text-emperor-950 text-sm font-medium">
+                  {item.name}
+                </h3>
+                <p className="text-emperor-950 text-xs text-gray-500">
                   R {item.price.toFixed(2)}
                 </p>
                 <div className="flex items-center gap-2 mt-1">
                   <Button
                     size="sm"
                     variant="outline"
+                    className="text-emperor-950"
                     onClick={() => decreaseQty(item.id)}
                   >
                     <Minus className="w-3 h-3" />
@@ -56,6 +59,7 @@ export function CartDrawer() {
                   <Button
                     size="sm"
                     variant="outline"
+                    className="text-emperor-950"
                     onClick={() => addToCart(item)}
                   >
                     <Plus className="w-3 h-3" />
@@ -76,17 +80,19 @@ export function CartDrawer() {
 
       {cart.length > 0 && (
         <div className="p-4 border-t border-gray-200">
-          <p className="font-semibold mb-3">Total: R {total.toFixed(2)}</p>
+          <p className="text-emperor-950 font-semibold mb-3">
+            Total: R {total.toFixed(2)}
+          </p>
           <div className="flex flex-col gap-y-2">
             <Button
               onClick={() => route.push("/cart")}
-              className="w-full bg-black text-white hover:bg-gray-800"
+              className="bg-emperor-950 text-white w-full text-white hover:bg-emperor-800"
             >
               Proceed to Cart
             </Button>{" "}
             <Button
               onClick={() => closeCart()}
-              className="w-full border bg-white text-black hover:bg-black hover:text-white"
+              className="text-emperor-950 w-full border bg-white text-black hover:bg-emperor-950 hover:text-white"
             >
               Continue Shopping
             </Button>

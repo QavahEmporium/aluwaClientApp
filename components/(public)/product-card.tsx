@@ -26,7 +26,7 @@ export function ProductCard({
 
   return (
     <Card
-      className={`${baseClasses} flex flex-col rounded-lg overflow-hidden py-2`}
+      className={`${baseClasses} flex flex-col rounded-lg overflow-hidden py-2 shadow-lg shadow-rose-bud-200`}
     >
       <CardContent className="p-2 flex flex-col gap-2 flex-grow">
         {/* Image */}
@@ -56,14 +56,16 @@ export function ProductCard({
         {/* Content */}
         <div className="p-2 flex flex-col flex-1">
           <Link href={url} className="hover:underline">
-            <h3 className="text-base sm:text-lg font-semibold mb-1">
+            <h3 className="text-rose-bud-500 text-base sm:text-lg font-semibold mb-1">
               {product.name}
             </h3>
           </Link>
 
-          <Badge className="mb-2 w-fit">{product.category}</Badge>
+          <Badge className="mb-2 w-fit bg-emperor-950 text-white">
+            {product.category}
+          </Badge>
 
-          <p className="font-bold text-sm sm:text-lg mb-4">
+          <p className="text-rose-bud-500 font-bold text-sm sm:text-lg mb-4">
             R{product.price.toFixed(2)}
           </p>
 

@@ -15,7 +15,7 @@ export const SubmitButton = ({
       {isPending ? (
         <button
           type="button"
-          className="flex gap-2 justify-center items-center bg-black text-white rounded-xl w-full h-[33px]"
+          className="flex gap-2 justify-center items-center bg-emperor-950 text-white rounded-xl w-full h-[33px]"
         >
           <LoaderCircle className="animate-spin" />
         </button>
@@ -36,7 +36,7 @@ export const AddToCartButton = ({ product }: { product: any }) => {
   return (
     <Button
       onClick={() => addToCart(product)}
-      className="mt-auto w-full"
+      className="mt-auto w-full bg-emperor-950 hover:bg-emperor-700 text-white"
       size="sm"
     >
       Add to Cart

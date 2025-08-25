@@ -32,7 +32,7 @@ export default function CartPage() {
               key={item.id}
               className="flex gap-4 border border-gray-300 rounded-md p-3"
             >
-              <div className="relative w-24 h-24 flex-shrink-0 rounded-md overflow-hidden border border-gray-200">
+              <div className="relative w-24 h-24 flex-shrink-0 rounded-md overflow-hidden shadow-lg shadow-rose-bud-200">
                 <Image
                   src={`/api/files/${item.imageUrl}`}
                   alt={item.name}
@@ -52,11 +52,19 @@ export default function CartPage() {
                 </div>
 
                 <div className="flex items-center gap-2 mt-2">
-                  <Button size="sm" onClick={() => decreaseQty(item.id)}>
+                  <Button
+                    className="bg-emperor-950 text-white"
+                    size="sm"
+                    onClick={() => decreaseQty(item.id)}
+                  >
                     -
                   </Button>
                   <span>{item.quantity}</span>
-                  <Button size="sm" onClick={() => addToCart(item)}>
+                  <Button
+                    className="bg-emperor-950 text-white"
+                    size="sm"
+                    onClick={() => addToCart(item)}
+                  >
                     +
                   </Button>
                   <Button
@@ -76,11 +84,11 @@ export default function CartPage() {
 
       {cart.length > 0 && (
         <div className="mt-8 border-t pt-4">
-          <p className="text-xl font-semibold">
+          <p className="text-emperor-950 text-xl font-semibold">
             Subtotal: R {subtotal.toFixed(2)}
           </p>
           <Button
-            className="w-full mt-4"
+            className="bg-emperor-950 text-white w-full mt-4"
             onClick={() => route.push("/checkout")}
           >
             Proceed to Checkout
