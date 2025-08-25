@@ -22,7 +22,7 @@ export const SubmitButton = ({
       ) : (
         <button
           type="submit"
-          className="bg-black hover:bg-gray-700 text-white rounded-xl w-full h-[33px]"
+          className="bg-emperor-950 hover:bg-gray-700 text-white rounded-xl w-full h-[33px]"
         >
           {name}
         </button>

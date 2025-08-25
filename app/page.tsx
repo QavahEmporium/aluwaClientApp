@@ -4,6 +4,7 @@ import PageHeader from "@/components/ui/page-header";
 import { ProductCard } from "@/components/(public)/product-card";
 import LandingClient from "@/components/(public)/landing-client";
 import { landingPageProducts } from "@/data/products";
+import { Facebook, Instagram, Twitter, MessageCircle } from "lucide-react"; // MessageCircle → WhatsApp-style
 
 export default async function LandingPage() {
   const categories = await landingPageProducts();
@@ -62,9 +63,46 @@ export default async function LandingPage() {
         <p className="mb-6 text-white/80 max-w-md mx-auto">
           Join thousands of satisfied customers and take the first step today.
         </p>
-        <LandingClient type="cta" />
-      </section>
 
+        {/* CTA */}
+        <LandingClient type="cta" />
+
+        {/* Social Links */}
+        <div className="flex justify-center gap-6 mt-8">
+          <a
+            href="https://wa.me/1234567890"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
+          >
+            <MessageCircle className="w-6 h-6 text-green-400" />
+          </a>
+          <a
+            href="https://instagram.com/yourbrand"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
+          >
+            <Instagram className="w-6 h-6 text-pink-400" />
+          </a>
+          <a
+            href="https://facebook.com/yourbrand"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
+          >
+            <Facebook className="w-6 h-6 text-blue-400" />
+          </a>
+          <a
+            href="https://twitter.com/yourbrand"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
+          >
+            <Twitter className="w-6 h-6 text-sky-400" />
+          </a>
+        </div>
+      </section>
       {/* Cart Drawer */}
       <LandingClient type="cart" />
     </main>
