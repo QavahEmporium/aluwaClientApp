@@ -70,7 +70,7 @@ export default async function LandingPage() {
         {/* Social Links */}
         <div className="flex justify-center gap-6 mt-8">
           <a
-            href="https://wa.me/1234567890"
+            href="https://wa.me/c/27682912776"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
