@@ -14,7 +14,7 @@ export default function ProfileLayout({
 
   const tabs = [
     { href: "/profile/orders", label: "Orders" },
-    { href: "/profile/wishlist", label: "Wishlist" },
+    // { href: "/profile/wishlist", label: "Wishlist" },
     { href: "/profile/account", label: "Account Settings" },
   ];
 
