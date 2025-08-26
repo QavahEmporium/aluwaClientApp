@@ -38,12 +38,12 @@ export default async function LandingPage() {
       {categories.map((category: any) => (
         <section
           key={category.id}
-          className="px-4 py-8 flex flex-col items-center"
+          className="px-4 pt-8 md:py-8 flex flex-col items-center"
         >
           <h2 className="text-emperor-900 text-xl font-semibold mb-4 text-center">
             {category.name}
           </h2>
-          <div className="bg-[#fcf7f0] flex gap-6 overflow-x-auto pb-8 scrollbar-hide justify-start sm:justify-center w-full">
+          <div className="bg-[#fcf7f0] flex gap-6 overflow-x-auto pb-5 scrollbar-hide justify-start sm:justify-center w-full">
             {category.products.length > 0 ? (
               category.products.map((product: any) => (
                 <ProductCard key={product.id} product={product} />
