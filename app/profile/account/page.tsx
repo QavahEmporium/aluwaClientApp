@@ -6,8 +6,6 @@ import { registerFormData } from "@/constants/user";
 import { useAuth } from "@/context/AuthContext";
 import { RegisterUserForm, registerUserformSchema } from "@/validations/user";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { startTransition, useActionState, useRef } from "react";
 import { useForm } from "react-hook-form";
 
@@ -19,9 +17,7 @@ const RegisterForm = () => {
 
   const { user, login } = useAuth();
   console.log({ user });
-  const searchParams = useSearchParams();
-  const redirectPath = searchParams.get("redirect") || "/";
-  const regsiterUserWithPathname = regsiterUser.bind(null, redirectPath);
+  const regsiterUserWithPathname = regsiterUser.bind(null, "");
 
   const [state, formAction, isPending] = useActionState(
     regsiterUserWithPathname,
@@ -71,15 +67,6 @@ const RegisterForm = () => {
         ))}
       </div>
       <SubmitButton name="Sign Up" isPending={isPending} />
-      <p className="mt-5 text-sm text-turquoise-900">
-        Already have an account?
-        <Link
-          className="text-pinklet-500 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
-          href={`/login?redirect=${redirectPath}`}
-        >
-          Sign In here
-        </Link>
-      </p>
     </form>
   );
 };
