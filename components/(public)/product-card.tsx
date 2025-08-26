@@ -26,7 +26,7 @@ export function ProductCard({
 
   return (
     <Card
-      className={`${baseClasses} flex flex-col rounded-lg overflow-hidden py-2 shadow-lg shadow-rose-bud-200`}
+      className={`${baseClasses} flex flex-col rounded-lg overflow-hidden py-2 shadow-lg shadow-rose-bud-300`}
     >
       <CardContent className="p-2 flex flex-col gap-2 flex-grow">
         {/* Image */}

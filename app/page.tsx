@@ -10,7 +10,7 @@ export default async function LandingPage() {
   const categories = await landingPageProducts();
 
   return (
-    <main className="bg-white text-black min-h-screen flex flex-col pb-12">
+    <main className="bg-[#fcf7f0] text-black min-h-screen flex flex-col pb-12">
       <PageHeader />
 
       {/* Hero Section */}
@@ -43,7 +43,7 @@ export default async function LandingPage() {
           <h2 className="text-emperor-900 text-xl font-semibold mb-4 text-center">
             {category.name}
           </h2>
-          <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide justify-start sm:justify-center w-full">
+          <div className="bg-[#fcf7f0] flex gap-6 overflow-x-auto pb-8 scrollbar-hide justify-start sm:justify-center w-full">
             {category.products.length > 0 ? (
               category.products.map((product: any) => (
                 <ProductCard key={product.id} product={product} />
@@ -102,7 +102,13 @@ export default async function LandingPage() {
             <Twitter className="w-6 h-6 text-sky-400" />
           </a>
         </div>
+
+        {/* Footer Copyright */}
+        <p className="mt-6 text-sm text-white/60">
+          © {new Date().getFullYear()} Elkore Tech. All rights reserved.
+        </p>
       </section>
+
       {/* Cart Drawer */}
       <LandingClient type="cart" />
     </main>
