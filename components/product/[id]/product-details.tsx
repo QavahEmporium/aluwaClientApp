@@ -39,7 +39,7 @@ export default function ProductDetails({
       {/* Back Button */}
       <button
         onClick={() => router.back()}
-        className="flex items-center mb-6 text-sm text-gray-600 hover:underline"
+        className="flex font-bold text-emperor-900 items-center mb-6 text-sm text-gray-600 hover:underline"
       >
         <ChevronLeft /> Back
       </button>
@@ -79,7 +79,7 @@ export default function ProductDetails({
         {/* Product Info */}
         <div className="flex flex-col justify-between md:w-1/2">
           <div>
-            <h1 className="text-rose-bud-500 text-3xl font-bold mb-4">
+            <h1 className="text-emperor-900 text-3xl font-bold mb-4">
               {product.name}
             </h1>
             <p className="text-emperor-900 text-gray-700 mb-6">
@@ -88,7 +88,7 @@ export default function ProductDetails({
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
-            <p className="text-rose-bud-500 text-2xl font-semibold mb-4 sm:mb-0">
+            <p className="text-emperor-900 text-2xl font-semibold mb-4 sm:mb-0">
               R{product.price.toFixed(2)}
             </p>
 
@@ -96,7 +96,7 @@ export default function ProductDetails({
             <div className="flex items-center rounded-xl p-1 border border-gray-300 w-28">
               <Button
                 size="sm"
-                className="bg-emperor-950 text-white"
+                className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
                 onClick={() => setQuantity((q) => (q > 1 ? q - 1 : 1))}
               >
                 -
@@ -104,7 +104,7 @@ export default function ProductDetails({
               <span className="flex-1 text-center">{quantity}</span>
               <Button
                 size="sm"
-                className="bg-emperor-950 text-white"
+                className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
                 onClick={() => setQuantity((q) => q + 1)}
               >
                 +
@@ -116,7 +116,7 @@ export default function ProductDetails({
               onClick={() =>
                 addToCart({ ...product, imageUrl: product.imageUrl }, quantity)
               }
-              className="mt-4 sm:mt-0 w-full sm:w-auto bg-emperor-950 text-white"
+              className="mt-4 sm:mt-0 w-full sm:w-auto bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
             >
               Add to Cart
             </Button>

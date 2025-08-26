@@ -41,7 +41,7 @@ export function ProductCard({ product }: any) {
           </h3>
         </Link>
 
-        <Badge className="bg-emperor-700 text-white mb-2 w-fit">
+        <Badge className="bg-rose-bud-500 text-white mb-2 w-fit">
           {product.category}
         </Badge>
 
@@ -51,7 +51,7 @@ export function ProductCard({ product }: any) {
 
         <Button
           onClick={() => addToCart(product)}
-          className="bg-rose-bud-400 text-white mt-auto w-full"
+          className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white mt-auto w-full"
           size="sm"
         >
           Add to Cart

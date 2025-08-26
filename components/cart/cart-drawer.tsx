@@ -50,19 +50,19 @@ export function CartDrawer() {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="text-emperor-950"
+                    className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
                     onClick={() => decreaseQty(item.id)}
                   >
-                    <Minus className="w-3 h-3" />
+                    -
                   </Button>
                   <span>{item.quantity}</span>
                   <Button
                     size="sm"
                     variant="outline"
-                    className="text-emperor-950"
+                    className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
                     onClick={() => addToCart(item)}
                   >
-                    <Plus className="w-3 h-3" />
+                    +
                   </Button>
                 </div>
               </div>
@@ -86,13 +86,13 @@ export function CartDrawer() {
           <div className="flex flex-col gap-y-2">
             <Button
               onClick={() => route.push("/cart")}
-              className="bg-emperor-950 text-white w-full text-white hover:bg-emperor-800"
+              className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white w-full text-white"
             >
               Proceed to Cart
             </Button>{" "}
             <Button
               onClick={() => closeCart()}
-              className="text-emperor-950 w-full border bg-white text-black hover:bg-emperor-950 hover:text-white"
+              className="text-emperor-950 w-full border bg-white text-black hover:bg-rose-bud-700 hover:text-white"
             >
               Continue Shopping
             </Button>

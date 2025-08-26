@@ -61,7 +61,7 @@ export function ProductCard({
             </h3>
           </Link>
 
-          <Badge className="mb-2 w-fit bg-rose-bud-900 text-white">
+          <Badge className="mb-2 w-fit bg-rose-bud-500 text-white">
             {product.category}
           </Badge>
 

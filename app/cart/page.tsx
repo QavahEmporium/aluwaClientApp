@@ -53,7 +53,7 @@ export default function CartPage() {
 
                 <div className="flex items-center gap-2 mt-2">
                   <Button
-                    className="bg-emperor-950 text-white"
+                    className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
                     size="sm"
                     onClick={() => decreaseQty(item.id)}
                   >
@@ -61,7 +61,7 @@ export default function CartPage() {
                   </Button>
                   <span>{item.quantity}</span>
                   <Button
-                    className="bg-emperor-950 text-white"
+                    className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
                     size="sm"
                     onClick={() => addToCart(item)}
                   >
@@ -88,7 +88,7 @@ export default function CartPage() {
             Subtotal: R {subtotal.toFixed(2)}
           </p>
           <Button
-            className="bg-emperor-950 text-white w-full mt-4"
+            className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white w-full mt-4"
             onClick={() => route.push("/checkout")}
           >
             Proceed to Checkout

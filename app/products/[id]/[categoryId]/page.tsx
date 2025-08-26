@@ -5,6 +5,7 @@ import {
   listProducts,
   listRelatedProducts,
 } from "@/data/products";
+import { Suspense } from "react";
 
 interface ProductPageProps {
   params: Promise<{ id: string; categoryId: string }>;
@@ -24,5 +25,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const product = await getProductById(id);
   const relatedProducts = await listRelatedProducts(id, categoryId);
 
-  return <ProductDetails product={product} relatedProducts={relatedProducts} />;
+  return (
+    <Suspense>
+      <ProductDetails product={product} relatedProducts={relatedProducts} />
+    </Suspense>
+  );
 }

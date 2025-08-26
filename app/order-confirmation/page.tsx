@@ -61,7 +61,7 @@ export default function OrderConfirmationPage() {
 
       <Button
         onClick={() => router.push("/")}
-        className="w-full py-3 text-lg font-semibold"
+        className="bg-rose-bud-500 hover:bg-rose-bud-700 w-full py-3 text-lg font-semibold"
       >
         Back to Shop
       </Button>
