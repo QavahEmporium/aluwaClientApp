@@ -56,16 +56,16 @@ export function ProductCard({
         {/* Content */}
         <div className="p-2 flex flex-col flex-1">
           <Link href={url} className="hover:underline">
-            <h3 className="text-rose-bud-500 text-base sm:text-lg font-semibold mb-1">
+            <h3 className="text-emperor-900 text-base sm:text-lg font-semibold mb-1">
               {product.name}
             </h3>
           </Link>
 
-          <Badge className="mb-2 w-fit bg-emperor-950 text-white">
+          <Badge className="mb-2 w-fit bg-rose-bud-900 text-white">
             {product.category}
           </Badge>
 
-          <p className="text-rose-bud-500 font-bold text-sm sm:text-lg mb-4">
+          <p className="text-emperor-900 font-bold text-sm sm:text-lg mb-4">
             R{product.price.toFixed(2)}
           </p>
 

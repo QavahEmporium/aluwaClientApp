@@ -14,12 +14,12 @@ export default async function LandingPage() {
       <PageHeader />
 
       {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-center justify-center">
+      <section className="relative h-[100vh] flex items-center justify-center">
         <Image
-          src="/images/hero3.jpg"
+          src="/images/banner.jpg"
           alt="Grooming products background"
           fill
-          className="object-cover"
+          className="object-cover object-scale-90"
           priority
         />
         <div className="absolute inset-0 bg-black/40" />

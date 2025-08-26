@@ -15,7 +15,7 @@ export default function LandingClient({
     return (
       <Button
         onClick={() => router.push("/products")}
-        className="bg-white text-black hover:bg-gray-200"
+        className="bg-rose-bud-500 text-white hover:bg-gray-200"
       >
         Shop Now
       </Button>
