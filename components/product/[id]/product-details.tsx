@@ -88,29 +88,30 @@ export default function ProductDetails({
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
-            <p className="text-emperor-900 text-2xl font-semibold mb-4 sm:mb-0">
-              R{product.price.toFixed(2)}
-            </p>
+            <div className="flex flex-row md:gap-6 items-cente justify-between items-center">
+              <p className="text-emperor-900 text-2xl font-semibold sm:mb-0">
+                R{product.price.toFixed(2)}
+              </p>
 
-            {/* Quantity selector */}
-            <div className="flex items-center rounded-xl p-1 border border-gray-300 w-28">
-              <Button
-                size="sm"
-                className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
-                onClick={() => setQuantity((q) => (q > 1 ? q - 1 : 1))}
-              >
-                -
-              </Button>
-              <span className="flex-1 text-center">{quantity}</span>
-              <Button
-                size="sm"
-                className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
-                onClick={() => setQuantity((q) => q + 1)}
-              >
-                +
-              </Button>
+              {/* Quantity selector */}
+              <div className="flex items-center rounded-xl p-1 border border-gray-300 w-34">
+                <Button
+                  size="sm"
+                  className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
+                  onClick={() => setQuantity((q) => (q > 1 ? q - 1 : 1))}
+                >
+                  -
+                </Button>
+                <span className="flex-1 text-center">{quantity}</span>
+                <Button
+                  size="sm"
+                  className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
+                  onClick={() => setQuantity((q) => q + 1)}
+                >
+                  +
+                </Button>
+              </div>
             </div>
-
             {/* Add to Cart button */}
             <Button
               onClick={() =>
