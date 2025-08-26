@@ -82,7 +82,7 @@ export default function ProductDetails({
             <h1 className="text-emperor-900 text-3xl font-bold mb-4">
               {product.name}
             </h1>
-            <p className="text-emperor-900 text-gray-700 mb-6">
+            <p className="text-rose-bud-500 text-gray-700 mb-6">
               {product.description}
             </p>
           </div>
@@ -96,7 +96,7 @@ export default function ProductDetails({
             <div className="flex items-center rounded-xl p-1 border border-gray-300 w-28">
               <Button
                 size="sm"
-                className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
+                className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
                 onClick={() => setQuantity((q) => (q > 1 ? q - 1 : 1))}
               >
                 -
@@ -104,7 +104,7 @@ export default function ProductDetails({
               <span className="flex-1 text-center">{quantity}</span>
               <Button
                 size="sm"
-                className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
+                className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
                 onClick={() => setQuantity((q) => q + 1)}
               >
                 +

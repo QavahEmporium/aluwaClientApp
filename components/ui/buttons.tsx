@@ -36,7 +36,7 @@ export const AddToCartButton = ({ product }: { product: any }) => {
   return (
     <Button
       onClick={() => addToCart(product)}
-      className="mt-auto w-full bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
+      className="mt-auto w-full rounded-full bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
       size="sm"
     >
       Add to Cart

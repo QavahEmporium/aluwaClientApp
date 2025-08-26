@@ -12,7 +12,7 @@ export function ProductCard({ product }: any) {
   const url = `/products/${product.id}/${product.categoryId}`;
 
   return (
-    <div className="flex flex-col border shadow-lg md:shadow-rose-bud-300 shadow-rose-bud-200 rounded-lg overflow-hidden w-full md:w-[260px] h-full">
+    <div className="flex flex-col border shadow-lg md:shadow-rose-bud-300 shadow-rose-bud-200 rounded-2xl overflow-hidden w-full md:w-[260px] h-full">
       {/* Image */}
       <Link href={url} className="relative aspect-square w-full block">
         {/* Loader (shimmer box) */}
@@ -34,7 +34,7 @@ export function ProductCard({ product }: any) {
       </Link>
 
       {/* Content */}
-      <div className="p-2 md:p-4 flex flex-col flex-1">
+      <div className="p-2 md:p-4 flex flex-col flex-1 bg-white">
         <Link href={url} className="hover:underline">
           <h3 className="text-emperor-900 text-base sm:text-lg font-semibold mb-1">
             {product.name}
@@ -51,7 +51,7 @@ export function ProductCard({ product }: any) {
 
         <Button
           onClick={() => addToCart(product)}
-          className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white mt-auto w-full"
+          className="bg-rose-bud-500 hover:bg-rose-bud-700 rounded-full text-white mt-auto w-full"
           size="sm"
         >
           Add to Cart

@@ -30,7 +30,7 @@ export default function ProductListing({
             key={cat}
             variant={selectedCategory === cat ? "default" : "outline"}
             onClick={() => setSelectedCategory(cat)}
-            className={`whitespace-nowrap text-sm px-4 py-2 rounded-full ${
+            className={`whitespace-nowrap text-sm px-4 py-2 rounded-full shadow-md shadow-rose-bud-300 ${
               selectedCategory === cat
                 ? "bg-rose-bud-500 text-white hover:bg-rose-bud-700"
                 : "bg-white text-emperor-950 hover:bg-rose-bud-100 border"

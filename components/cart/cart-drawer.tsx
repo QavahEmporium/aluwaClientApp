@@ -50,7 +50,7 @@ export function CartDrawer() {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
+                    className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
                     onClick={() => decreaseQty(item.id)}
                   >
                     -
@@ -59,7 +59,7 @@ export function CartDrawer() {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
+                    className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
                     onClick={() => addToCart(item)}
                   >
                     +
@@ -92,7 +92,7 @@ export function CartDrawer() {
             </Button>{" "}
             <Button
               onClick={() => closeCart()}
-              className="text-emperor-950 w-full border bg-white text-black hover:bg-rose-bud-700 hover:text-white"
+              className="text-emperor-950 w-full border bg-white text-black hover:bg-rose-bud-50 hover:text-black"
             >
               Continue Shopping
             </Button>
