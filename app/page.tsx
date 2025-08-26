@@ -78,7 +78,7 @@ export default async function LandingPage() {
             <MessageCircle className="w-6 h-6 text-green-400" />
           </a>
           <a
-            href="https://instagram.com/yourbrand"
+            href="https://www.instagram.com/aluwahaircare2024/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
@@ -86,21 +86,13 @@ export default async function LandingPage() {
             <Instagram className="w-6 h-6 text-pink-400" />
           </a>
           <a
-            href="https://facebook.com/yourbrand"
+            href="https://www.facebook.com/p/Aluwa-Hair-Care-61555125434916/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
           >
             <Facebook className="w-6 h-6 text-blue-400" />
-          </a>
-          <a
-            href="https://twitter.com/yourbrand"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
-          >
-            <Twitter className="w-6 h-6 text-sky-400" />
-          </a>
+          </a>          
         </div>
 
         {/* Footer Copyright */}
