@@ -21,7 +21,7 @@ export default function ProductListing({
       : products.filter((p: any) => p.category === selectedCategory);
 
   return (
-    <main className="md:flex md:flex-col md:items-center md:justify-center bg-white text-black min-h-screen pt-16 md:pt-20 pb-20 md:pb-0 px-3">
+    <main className="md:flex md:flex-col md:items-center bg-[#fcf7f0] text-black min-h-screen pt-16 md:pt-20 pb-20 md:pb-10 px-3">
       <PageHeader />
       {/* Category Filter */}
       <div className="flex gap-2 overflow-x-auto pb-3 scrollbar-hide my-6 md:mb-6">
@@ -32,8 +32,8 @@ export default function ProductListing({
             onClick={() => setSelectedCategory(cat)}
             className={`whitespace-nowrap text-sm px-4 py-2 rounded-full ${
               selectedCategory === cat
-                ? "bg-emperor-950 text-white hover:bg-emperor-950/90"
-                : "bg-white text-emperor-950 hover:bg-emperor-100 border"
+                ? "bg-rose-bud-500 text-white hover:bg-rose-bud-700"
+                : "bg-white text-emperor-950 hover:bg-rose-bud-100 border"
             }`}
           >
             {cat}
@@ -43,7 +43,7 @@ export default function ProductListing({
 
       {/* Product Grid */}
       {filteredProducts.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-8 gap-x-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 md:gap-14 gap-y-8 gap-x-4">
           {filteredProducts.map((product: any) => (
             <div key={product.id} className="flex flex-col">
               <ProductCard product={product} />
