@@ -116,7 +116,7 @@ export default function ProductDetails({
               onClick={() =>
                 addToCart({ ...product, imageUrl: product.imageUrl }, quantity)
               }
-              className="mt-4 sm:mt-0 w-full sm:w-auto bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
+              className="mt-4 rounded-full sm:mt-0 w-full sm:w-auto bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
             >
               Add to Cart
             </Button>

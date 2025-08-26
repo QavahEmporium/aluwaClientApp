@@ -12,7 +12,7 @@ export function ProductCard({ product }: any) {
   const url = `/products/${product.id}/${product.categoryId}`;
 
   return (
-    <div className="flex flex-col border shadow-lg md:shadow-rose-bud-300 shadow-rose-bud-200 rounded-2xl overflow-hidden w-full md:w-[260px] h-full">
+    <div className="flex flex-col border shadow-lg md:shadow-rose-bud-300 shadow-rose-bud-200 rounded-2xl overflow-hidden w-full md:w-[260px] h-full md:pb-0 pb-2">
       {/* Image */}
       <Link href={url} className="relative aspect-square w-full block">
         {/* Loader (shimmer box) */}

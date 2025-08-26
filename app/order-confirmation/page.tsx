@@ -36,7 +36,7 @@ export default function OrderConfirmationPage() {
       <h1 className="text-3xl font-bold mb-6 text-center">
         Thank you for your order!
       </h1>
-      <p className="mb-6 text-center text-gray-700">
+      <p className="mb-6 text-center text-rose-bud-500">
         Your order has been received and is being processed. You will receive an
         email confirmation shortly.
       </p>

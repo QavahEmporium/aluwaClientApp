@@ -42,16 +42,16 @@ const Input = ({
   return (
     <div className="flex flex-col my-3">
       <div className="flex gap-1">
-        <label className="font-mono text-turquoise-900" htmlFor="">
+        <label className="font-mono text-emperor-950" htmlFor="">
           {label}
         </label>
-        {isRequired && <p className="font-mono text-pinklet-500">*</p>}
+        {isRequired && <p className="font-mono text-rose-bud-500">*</p>}
       </div>
 
       <div
         className={`flex items-center gap-1 px-4 rounded-xl ${
           isPending ? disabledBgColour : bgColour
-        } overflow-hidden shadow-md`}
+        } overflow-hidden shadow-md shadow-rose-bud-200`}
       >
         {Icon && <Icon size={20} className="text-gray-400" />}
 

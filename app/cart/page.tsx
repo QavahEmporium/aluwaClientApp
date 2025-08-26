@@ -30,9 +30,9 @@ export default function CartPage() {
           {cart.map((item) => (
             <li
               key={item.id}
-              className="flex gap-4 border border-gray-300 rounded-md p-3"
+              className="flex gap-4 border border-gray-300 rounded-md p-3 shadow-md shadow-rose-bud-200"
             >
-              <div className="relative w-24 h-24 flex-shrink-0 rounded-md overflow-hidden shadow-lg shadow-rose-bud-200">
+              <div className="relative w-24 h-24 flex-shrink-0 rounded-md overflow-hidden">
                 <Image
                   src={`/api/files/${item.imageUrl}`}
                   alt={item.name}
@@ -53,7 +53,7 @@ export default function CartPage() {
 
                 <div className="flex items-center gap-2 mt-2">
                   <Button
-                    className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
+                    className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
                     size="sm"
                     onClick={() => decreaseQty(item.id)}
                   >
@@ -61,7 +61,7 @@ export default function CartPage() {
                   </Button>
                   <span>{item.quantity}</span>
                   <Button
-                    className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white"
+                    className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
                     size="sm"
                     onClick={() => addToCart(item)}
                   >
