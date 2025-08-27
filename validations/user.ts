@@ -49,6 +49,37 @@ export type RegisterUserState = {
   message?: string | null;
 };
 
+export const updateAccountformSchema = z
+  .object({
+    name: z.string().trim().min(3, "Username must be at least 3 characters"),
+    email: z.string().email("Invalid email address"),
+    contactNumber: z
+      .string()
+      .min(6, {
+        message: "Contact Number is required",
+      })
+      .regex(/[0-9]/, { message: "Contain only number between 0 - 9." })
+      .trim(),
+  })
+  .superRefine(({ contactNumber }, ctx) => {
+    if (contactNumber !== "" && !contactNumber.startsWith("0")) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Contact Number must start with 0. E.g 067 123 4545.",
+        path: ["contactNumber"],
+      });
+    }
+  });
+
+export type AcccountState = {
+  errors?: {
+    name?: string[];
+    email?: string[];
+    contactNumber?: string[];
+  };
+  message?: string | null;
+};
+
 export type LoginUserState = {
   errors?: {
     email?: string[];
@@ -69,3 +100,4 @@ export const updateProfileSchema = z.object({
 
 export type RegisterUserForm = z.infer<typeof registerUserformSchema>;
 export type LoginUserForm = z.infer<typeof loginUserFormSchema>;
+export type UpdateAccountForm = z.infer<typeof updateAccountformSchema>;

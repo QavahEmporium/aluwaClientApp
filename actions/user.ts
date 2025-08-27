@@ -4,12 +4,15 @@ import {
   loginUserFormSchema,
   registerUserformSchema,
   RegisterUserState,
+  AcccountState,
+  updateAccountformSchema,
 } from "@/validations/user";
 import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 import { createSession, deleteSession } from "@/lib/session";
 import { getUser, isUserExists } from "@/data/user";
-import { createUser } from "@/services/user";
+import { createUser, updateUser } from "@/services/user";
+import { revalidatePath } from "next/cache";
 
 export async function regsiterUser(
   pathname: string,
@@ -113,4 +116,31 @@ export async function loginUser(
 export async function logoutSessionUser() {
   await deleteSession();
   redirect("/");
+}
+
+export async function updateAccountDetails(
+  prevState: AcccountState | undefined,
+  formData: FormData
+) {
+  const validatedFields = updateAccountformSchema.safeParse(
+    Object.fromEntries(formData)
+  );
+
+  if (!validatedFields.success) {
+    const state: AcccountState = {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Oops, I think there's a mistake with your inputs.",
+    };
+    return state;
+  }
+
+  const { name, email, contactNumber } = validatedFields.data;
+
+  try {
+    await updateUser(name, email, contactNumber);
+  } catch (error) {
+    throw new Error("Error creating user:" + error);
+  }
+
+  revalidatePath("/profile/account");
 }

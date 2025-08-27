@@ -7,7 +7,7 @@ async function OrdersPageServer() {
   const orders = await listOrders();
 
   return (
-    <Suspense>
+    <Suspense fallback={<>Loading ...</>}>
       <OrdersPageClient orders={orders || []} />
     </Suspense>
   );

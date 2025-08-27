@@ -15,14 +15,11 @@ export const getSessionUser = cache(async () => {
   if (!session) return null;
 
   const userId = session?.userId as string;
-  const user = (await User.findById(
-    userId,
-    "name username contactNumber"
-  )) as any;
+  const user = (await User.findById(userId, "name email contactNumber")) as any;
   if (!user) return null;
-  
-  const { name, username, contactNumber } = user;
-  return { name, username, contactNumber };
+
+  const { name, email, contactNumber } = user;
+  return { name, email, contactNumber };
 });
 
 export const isUserExists = async (userDetail: any) => {
