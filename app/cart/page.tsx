@@ -1,13 +1,11 @@
 "use client";
-
 import { useCart } from "@/context/CartContext";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import CartItem from "@/components/cart/cart-item";
+import CartSummary from "@/components/cart/cart-summary";
 
 export default function CartPage() {
-  const route = useRouter();
-  const { cart, removeFromCart, decreaseQty, addToCart } = useCart();
+  const { cart } = useCart();
 
   const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -15,86 +13,22 @@ export default function CartPage() {
   );
 
   return (
-    <main
-      className="min-h-screen bg-white text-black 
-                     pt-[64px]  /* push content below desktop navbar */
-                     pb-[72px]  /* push content above mobile bottom navbar */
-                     max-w-4xl mx-auto p-4"
-    >
+    <main className="min-h-screen bg-white text-black pt-[64px] pb-[72px] max-w-4xl mx-auto p-4">
       <h1 className="text-emperor-900 text-3xl font-bold mb-6">Your Cart</h1>
 
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
         <ul className="space-y-4 overflow-auto max-h-[70vh]">
-          {cart.map((item) => (
-            <li
-              key={item.id}
-              className="flex gap-4 border border-gray-300 rounded-md p-3 shadow-md shadow-rose-bud-200"
-            >
-              <div className="relative w-24 h-24 flex-shrink-0 rounded-md overflow-hidden">
-                <Image
-                  src={`/api/files/${item.imageUrl}`}
-                  alt={item.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 80px, 96px"
-                  loading="lazy"
-                />
-              </div>
-
-              <div className="flex flex-col flex-1 justify-between">
-                <div>
-                  <h2 className="text-lg font-semibold">{item.name}</h2>
-                  <p className="text-sm text-gray-600">
-                    R {item.price.toFixed(2)}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-2 mt-2">
-                  <Button
-                    className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
-                    size="sm"
-                    onClick={() => decreaseQty(item.id)}
-                  >
-                    -
-                  </Button>
-                  <span>{item.quantity}</span>
-                  <Button
-                    className="bg-emperor-900 hover:bg-emperor-700 text-white hover:text-white"
-                    size="sm"
-                    onClick={() => addToCart(item)}
-                  >
-                    +
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => removeFromCart(item.id)}
-                    className="ml-auto"
-                  >
-                    Remove
-                  </Button>
-                </div>
-              </div>
-            </li>
-          ))}
+          <AnimatePresence>
+            {cart.map((item) => (
+              <CartItem key={item.id} item={item} />
+            ))}
+          </AnimatePresence>
         </ul>
       )}
 
-      {cart.length > 0 && (
-        <div className="mt-8 border-t pt-4">
-          <p className="text-emperor-950 text-xl font-semibold">
-            Subtotal: R {subtotal.toFixed(2)}
-          </p>
-          <Button
-            className="bg-rose-bud-500 hover:bg-rose-bud-700 text-white w-full mt-4"
-            onClick={() => route.push("/checkout")}
-          >
-            Proceed to Checkout
-          </Button>
-        </div>
-      )}
+      {cart.length > 0 && <CartSummary subtotal={subtotal} />}
     </main>
   );
 }
