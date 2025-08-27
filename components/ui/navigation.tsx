@@ -34,7 +34,7 @@ export function Navigation() {
       {/* Desktop Navbar */}
       <nav className="hidden md:flex fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50 justify-between items-center px-6 py-3">
         <Link href="/" className="text-xl font-bold">
-          MyShop
+          Aluwa HairCare
         </Link>
         <div className="flex items-center gap-6">
           {navItems.map(({ href, label, icon: Icon }) => (
