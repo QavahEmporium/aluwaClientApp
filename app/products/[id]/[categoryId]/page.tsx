@@ -25,6 +25,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const product = await getProductById(id);
   const relatedProducts = await listRelatedProducts(id, categoryId);
 
+  if (!product) return null;
+
   return (
     <Suspense>
       <ProductDetails product={product} relatedProducts={relatedProducts} />
