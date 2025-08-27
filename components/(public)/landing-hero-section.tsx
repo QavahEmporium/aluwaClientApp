@@ -30,16 +30,27 @@ const LandingHeroSection = () => {
         />
       </motion.div>
 
-      {/* Overlay with fade-in */}
+      {/* Dark Overlay */}
       <motion.div
         initial={{ opacity: 0.3 }}
         animate={{ opacity: 0.5 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className="absolute inset-0 bg-black"
+        className="absolute inset-0 bg-black z-10"
       />
 
       {/* Hero Content */}
-      <div className="relative z-10 text-center px-6">
+      <div className="relative z-20 text-center px-6">
+        {/* Logo */}
+        <div className="relative w-[280px] h-[280px] mx-auto mb-6">
+          <Image
+            src="/images/logo-1.jpg"
+            alt="Grooming products logo"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+
         <motion.h1
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
