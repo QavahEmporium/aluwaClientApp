@@ -1,10 +1,11 @@
-// components/ui/product-card.tsx
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/context/CartContext";
+import { motion } from "framer-motion";
 
 export function ProductCard({ product }: any) {
   const { addToCart } = useCart();
@@ -12,14 +13,15 @@ export function ProductCard({ product }: any) {
   const url = `/products/${product.id}/${product.categoryId}`;
 
   return (
-    <div className="flex flex-col border shadow-lg md:shadow-rose-bud-300 shadow-rose-bud-200 rounded-2xl overflow-hidden w-full md:w-[260px] h-full md:pb-0 pb-2">
+    <motion.div
+      whileHover={{ scale: 1.03 }}
+      className="flex flex-col border shadow-lg md:shadow-rose-bud-300 shadow-rose-bud-200 rounded-2xl overflow-hidden w-full md:w-[260px] h-full md:pb-0 pb-2"
+    >
       {/* Image */}
       <Link href={url} className="relative aspect-square w-full block">
-        {/* Loader (shimmer box) */}
         {!imageLoaded && (
           <div className="absolute inset-0 bg-gray-200 animate-pulse" />
         )}
-
         <Image
           src={`/api/files/${product.imageUrl}`}
           alt={product.name}
@@ -57,6 +59,6 @@ export function ProductCard({ product }: any) {
           Add to Cart
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 }

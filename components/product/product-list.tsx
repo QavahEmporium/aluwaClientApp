@@ -5,6 +5,7 @@ import { ProductCard } from "./products-list-card";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/ui/page-header";
 import { CartDrawer } from "@/components/cart/cart-drawer";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ProductListing({
   products,
@@ -20,11 +21,36 @@ export default function ProductListing({
       ? products
       : products.filter((p: any) => p.category === selectedCategory);
 
+  const containerVariants = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.15 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" as const },
+    },
+    exit: {
+      opacity: 0,
+      y: 30,
+      transition: { duration: 0.3, ease: "easeIn" as const },
+    },
+  };
+
   return (
     <main className="md:flex md:flex-col md:items-center bg-[#fcf7f0] text-black min-h-screen pt-16 md:pt-20 pb-20 md:pb-10 px-3">
       <PageHeader />
+
       {/* Category Filter */}
-      <div className="flex gap-2 overflow-x-auto pb-3 scrollbar-hide my-6 md:mb-6">
+      <motion.div
+        className="flex gap-2 overflow-x-auto pb-3 scrollbar-hide my-6 md:mb-6"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         {categories.map((cat) => (
           <Button
             key={cat}
@@ -39,20 +65,43 @@ export default function ProductListing({
             {cat}
           </Button>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Product Grid */}
-      {filteredProducts.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 md:gap-14 gap-y-8 gap-x-4">
-          {filteredProducts.map((product: any) => (
-            <div key={product.id} className="flex flex-col">
-              <ProductCard product={product} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-gray-500 text-center">No products found.</p>
-      )}
+      {/* Product Grid with AnimatePresence */}
+      <AnimatePresence mode="wait">
+        {filteredProducts.length > 0 ? (
+          <motion.div
+            key={selectedCategory} // Important: key triggers exit + enter animation
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 md:gap-14 gap-y-8 gap-x-4"
+            initial="hidden"
+            animate="show"
+            exit="hidden"
+            variants={containerVariants}
+          >
+            {filteredProducts.map((product: any) => (
+              <motion.div
+                key={product.id}
+                variants={itemVariants}
+                className="flex flex-col"
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))}
+          </motion.div>
+        ) : (
+          <motion.p
+            key={selectedCategory}
+            className="text-gray-500 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+          >
+            No products found.
+          </motion.p>
+        )}
+      </AnimatePresence>
+
       <CartDrawer />
     </main>
   );
