@@ -1,6 +1,7 @@
 import { listProducts } from "@/data/products";
 import { listCategories } from "@/data/category";
 import ProductListing from "@/components/product/product-list";
+export const revalidate = 0;
 
 export default async function ProductListingPage() {
   const products = await listProducts();

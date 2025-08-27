@@ -5,6 +5,7 @@ import LandingHeroSection from "@/components/(public)/landing-hero-section";
 import ProductList from "@/components/(public)/product-list";
 import CallToAction from "@/components/(public)/landing-footer";
 import { CartDrawer } from "@/components/cart/cart-drawer";
+export const revalidate = 0;
 
 export default async function LandingPage() {
   const categories = await landingPageProducts();
