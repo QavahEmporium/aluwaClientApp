@@ -41,9 +41,9 @@ const LandingHeroSection = () => {
       {/* Hero Content */}
       <div className="relative z-20 text-center px-6">
         {/* Logo */}
-        <div className="relative w-[280px] h-[280px] mx-auto mb-6">
+        <div className="relative w-[380px] h-[380px] mx-auto">
           <Image
-            src="/images/logo-1.jpg"
+            src="/images/logo-3.png"
             alt="Grooming products logo"
             fill
             className="object-contain"
@@ -53,16 +53,16 @@ const LandingHeroSection = () => {
 
         <motion.h1
           initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          animate={{ y: -60, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl font-bold text-white mb-4 leading-tight"
+          className="text-2xl md:text-4xl font-bold text-white mb-4 leading-tight"
         >
           Premium Hair & Beard Care
         </motion.h1>
 
         <motion.p
           initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          animate={{ y: -60, opacity: 1 }}
           transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
           className="text-white/90 mb-6 max-w-md mx-auto"
         >
@@ -71,7 +71,7 @@ const LandingHeroSection = () => {
 
         <motion.div
           initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          animate={{ y: -60, opacity: 1 }}
           transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
         >
           <Button
