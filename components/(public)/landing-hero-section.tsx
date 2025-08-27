@@ -43,7 +43,7 @@ const LandingHeroSection = () => {
         {/* Logo */}
         <div className="relative w-[380px] h-[380px] mx-auto">
           <Image
-            src="/images/logo-3.png"
+            src="/images/logo-2.png"
             alt="Grooming products logo"
             fill
             className="object-contain"
