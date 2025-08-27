@@ -33,12 +33,12 @@ export default function OrderConfirmationPage() {
 
   return (
     <main className="min-h-screen bg-white text-black p-6 pt-[64px] pb-[72px] max-w-lg mx-auto flex flex-col items-center">
-      <h1 className="text-3xl font-bold mb-6 text-center">
+      <h1 className="text-emperor-900 text-3xl font-bold mb-6 text-center">
         Thank you for your order!
       </h1>
       <p className="mb-6 text-center text-rose-bud-500">
-        Your order has been received and is being processed. You will receive an
-        email confirmation shortly.
+        Your order has been received and is being processed. We will contact you
+        shortly.
       </p>
 
       <section className="w-full border border-gray-300 rounded-md p-4 mb-6">

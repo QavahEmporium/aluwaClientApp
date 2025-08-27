@@ -21,7 +21,7 @@ export default function CartPage() {
                      pb-[72px]  /* push content above mobile bottom navbar */
                      max-w-4xl mx-auto p-4"
     >
-      <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+      <h1 className="text-emperor-900 text-3xl font-bold mb-6">Your Cart</h1>
 
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
