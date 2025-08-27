@@ -12,6 +12,7 @@ import {
   LogIn,
   UserPlus,
 } from "lucide-react";
+import Image from "next/image";
 
 export function Navigation() {
   const pathname = usePathname();
@@ -33,8 +34,14 @@ export function Navigation() {
     <>
       {/* Desktop Navbar */}
       <nav className="hidden md:flex fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50 justify-between items-center px-6 py-3">
-        <Link href="/" className="text-xl font-bold">
-          Aluwa HairCare
+        <Link href="/" className="relative w-[70px] h-[40px]">
+          <Image
+            src="/images/logo-1.jpg"
+            alt="Grooming products logo"
+            fill
+            className="object-cover"
+            priority
+          />
         </Link>
         <div className="flex items-center gap-6">
           {navItems.map(({ href, label, icon: Icon }) => (
