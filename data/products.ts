@@ -117,6 +117,7 @@ export async function listRelatedProducts(
   const filter: any = {
     categoryId: new mongoose.Types.ObjectId(categoryId),
     _id: { $ne: new mongoose.Types.ObjectId(productId) }, // exclude current product
+    isPublished: true,
   };
 
   const products = (await Product.find(filter)
