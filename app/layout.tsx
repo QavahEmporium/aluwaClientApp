@@ -16,8 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Beard & Hair Store",
-  description: "Custom coded store for grooming products",
+  title: "Aluwa HairCare",
+  description:
+    "Natural, effective, and designed for anyone who values authenticity and results.",
 };
 
 export const viewport: Viewport = {
