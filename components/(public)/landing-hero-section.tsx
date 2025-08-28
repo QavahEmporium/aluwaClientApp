@@ -71,7 +71,7 @@ const LandingHeroSection = () => {
           transition={{ duration: 0.9, delay: 0.6, ease: "easeOut" }}
           className="text-white/90 mb-6 max-w-md mx-auto"
         >
-          Natural, effective, and designed for the modern gentleman.
+          Natural, effective, and designed for anyone who values authenticity and results.
         </motion.p>
 
         <motion.div
