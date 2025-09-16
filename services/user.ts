@@ -1,6 +1,5 @@
 "server-only";
 
-import { CLIENT, CREDENTIALS } from "@/constants/user";
 import { getUser } from "@/data/user";
 import { verifySession } from "@/lib/dal";
 import dbConnect from "@/lib/db";

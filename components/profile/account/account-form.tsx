@@ -14,10 +14,10 @@ const AccountForm = ({ user }: { user: any }) => {
     errors: {},
   };
 
-  const regsiterUserWithPathname = updateAccountDetails.bind(null);
+  const updateAccountDetailsPathname = updateAccountDetails.bind(null);
 
   const [state, formAction, isPending] = useActionState(
-    regsiterUserWithPathname,
+    updateAccountDetailsPathname,
     initialState
   );
 
