@@ -13,8 +13,6 @@ export async function POST(req: Request) {
     const data: Record<string, string> = {};
     params.forEach((value, key) => (data[key] = value));
 
-    console.log("✅ Payfast ITN Received:", data);
-
     // 2️⃣ Rebuild signature string (alphabetical order, encode values)
     let signatureString = Object.entries(data)
       .filter(([k]) => k !== "signature") // exclude signature from string
@@ -78,7 +76,7 @@ export async function POST(req: Request) {
     else if (data.payment_status === "CANCELLED") status = "cancelled";
 
     console.log({ status });
-    Order.findByIdAndUpdate(
+    await Order.findByIdAndUpdate(
       data.m_payment_id,
       {
         status,
