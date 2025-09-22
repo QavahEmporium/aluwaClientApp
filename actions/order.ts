@@ -45,7 +45,11 @@ export async function createOrderAction(
       cart
     );
 
-    url = await createPaymentUrl(order?.totalAmount!, "Aluwa HairCare Product");
+    url = await createPaymentUrl(
+      order?.totalAmount!,
+      "Aluwa HairCare Product",
+      order?._id!.toString()
+    );
   } catch (error) {
     console.error("Error creating order:", error);
     return {
@@ -57,7 +61,11 @@ export async function createOrderAction(
   redirect(url);
 }
 
-export async function createPaymentUrl(amount: number, product_name: string) {
+export async function createPaymentUrl(
+  amount: number,
+  productName: string,
+  orderId: string
+) {
   const user = await getSessionUser();
 
   const email =
@@ -75,12 +83,13 @@ export async function createPaymentUrl(amount: number, product_name: string) {
     return_url: `${process.env.SITE_URL!}/${process.env.PAYFAST_RETURN_URL!}`,
     cancel_url: `${process.env.SITE_URL!}/${process.env.PAYFAST_CANCEL_URL!}`,
     notify_url: `${process.env.SITE_URL!}/${process.env.PAYFAST_NOTIFY_URL!}`,
+    m_payment_id: orderId ?? `order-${Date.now()}`, // custom ID
     name_first: first,
     name_last: last,
     email_address: email, // sandbox email
     amount: amount.toFixed(2),
-    item_name: product_name,
-    item_description: product_name,
+    item_name: productName,
+    item_description: productName,
   };
 
   // 3️⃣ Build final encoded query string with signature
