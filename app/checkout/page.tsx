@@ -60,15 +60,11 @@ const CheckoutForm = () => {
     );
   }
 
-  useEffect(() => {
-    if (!user) {
-      router.push("/login?redirect=/checkout");
-    }
-  }, [router]);
-
   return (
     <main className="min-h-screen bg-white text-black p-6 pt-[64px] pb-[72px] max-w-lg mx-auto">
-      <h1 className="text-emperor-900 text-3xl font-bold mb-6 text-center">Checkout</h1>
+      <h1 className="text-emperor-900 text-3xl font-bold mb-6 text-center">
+        Checkout
+      </h1>
 
       <form
         ref={formRef}
