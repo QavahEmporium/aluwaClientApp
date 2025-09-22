@@ -91,32 +91,3 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
-/* 
-
-✅ Payfast ITN Received: {
-  m_payment_id: '68d11da18abb77f304605bde',
-  pf_payment_id: '2794127',
-  payment_status: 'COMPLETE',
-  item_name: 'Aluwa HairCare Product',
-  item_description: 'Aluwa HairCare Product',
-  amount_gross: '550.00',
-  amount_fee: '-12.65',
-  amount_net: '537.35',
-  custom_str1: '',
-  custom_str2: '',
-  custom_str3: '',
-  custom_str4: '',
-  custom_str5: '',
-  custom_int1: '',
-  custom_int2: '',
-  custom_int3: '',
-  custom_int4: '',
-  custom_int5: '',
-  name_first: 'Qavah',
-  name_last: '',
-  email_address: 'admin@theugatour.com',
-  merchant_id: '10042059',
-  signature: '2f01285eb12ce49106452024160a9935'
-}
-
-*/
