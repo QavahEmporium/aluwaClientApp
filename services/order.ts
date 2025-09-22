@@ -51,3 +51,14 @@ export async function createOrder(form: any, cart: any[]) {
 
   return order;
 }
+
+export async function updateOrder(orderId: string, status: string) {
+  await dbConnect();
+  await Order.findByIdAndUpdate(
+    orderId,
+    {
+      status,
+    },
+    { new: true }
+  );
+}

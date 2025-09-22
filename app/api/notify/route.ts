@@ -1,7 +1,7 @@
 // app/api/notify/route.ts
 import { NextResponse } from "next/server";
 import crypto from "crypto";
-import Order from "@/models/order";
+import { updateOrder } from "@/services/order";
 
 export async function POST(req: Request) {
   try {
@@ -75,15 +75,7 @@ export async function POST(req: Request) {
     if (data.payment_status === "COMPLETE") status = "complete";
     else if (data.payment_status === "CANCELLED") status = "cancelled";
 
-    console.log({ status });
-    await Order.findByIdAndUpdate(
-      data.m_payment_id,
-      {
-        status,
-      },
-      { new: true }
-    );
-
+    await updateOrder(data.m_payment_id, status);
     return NextResponse.json({ status: "success" }, { status: 200 });
   } catch (error) {
     console.error("❌ Error processing Payfast ITN:", error);
