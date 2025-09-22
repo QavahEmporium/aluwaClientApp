@@ -77,6 +77,7 @@ export async function POST(req: Request) {
     if (data.payment_status === "COMPLETE") status = "complete";
     else if (data.payment_status === "CANCELLED") status = "cancelled";
 
+    console.log({ status });
     Order.findByIdAndUpdate(
       data.m_payment_id,
       {
