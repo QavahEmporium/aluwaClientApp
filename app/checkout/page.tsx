@@ -10,8 +10,7 @@ import InputValidated from "@/components/ui/input-validated";
 import { SubmitButton } from "@/components/ui/buttons";
 import { createOrderAction } from "@/actions/order";
 import { useCart } from "@/context/CartContext";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
+import { useDelivery } from "@/context/DeliveryContext";
 
 const CheckoutForm = () => {
   const initialState = {
@@ -20,13 +19,13 @@ const CheckoutForm = () => {
   };
   const pathname = "/order-confirmation";
   const { cart } = useCart();
-  const { user } = useAuth();
-  const router = useRouter();
+  const { selectedDelivery } = useDelivery();
 
   const createOrderActionWithParams = createOrderAction.bind(
     null,
     pathname,
-    cart
+    cart,
+    selectedDelivery!
   );
 
   const [state, formAction, isPending] = useActionState(

@@ -1,25 +1,26 @@
 "use client";
 import { useCart } from "@/context/CartContext";
+import { useDelivery } from "@/context/DeliveryContext";
 import { AnimatePresence, motion } from "framer-motion";
 import CartItem from "@/components/cart/cart-item";
 import CartSummary from "@/components/cart/cart-summary";
 
 export default function CartPage() {
   const { cart } = useCart();
+  const { selectedDelivery, setSelectedDelivery } = useDelivery();
+
+  // Example delivery options
+  const deliveryOptions = [{ id: "pudo", name: "Pudo Locker", price: 89 }];
 
   const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
+  const total = subtotal + (selectedDelivery?.price || 0);
 
-  // Motion variants for stagger
   const containerVariants = {
     hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.1, // Stagger each CartItem by 0.1s
-      },
-    },
+    show: { transition: { staggerChildren: 0.1 } },
   };
 
   return (
@@ -43,7 +44,40 @@ export default function CartPage() {
         </motion.ul>
       )}
 
-      {cart.length > 0 && <CartSummary subtotal={subtotal} />}
+      {cart.length > 0 && (
+        <>
+          {/* Delivery Options */}
+          <div className="mt-6 border-t pt-4">
+            <h2 className="text-lg font-semibold mb-3">Delivery Options</h2>
+            <div className="space-y-2">
+              {deliveryOptions.map((option) => (
+                <label
+                  key={option.id}
+                  className="flex items-center justify-between border rounded-lg p-3 cursor-pointer hover:bg-gray-50"
+                >
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="radio"
+                      name="delivery"
+                      value={option.id}
+                      checked={selectedDelivery?.id === option.id}
+                      onChange={() => setSelectedDelivery(option)}
+                      className="w-4 h-4"
+                    />
+                    <span>{option.name}</span>
+                  </div>
+                  <span className="font-medium">
+                    {option.price === 0 ? "Free" : `R${option.price}`}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Cart Summary */}
+          <CartSummary subtotal={subtotal} total={total} />
+        </>
+      )}
     </main>
   );
 }

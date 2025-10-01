@@ -4,6 +4,7 @@ import { checkoutFormSchema } from "@/validations/address";
 import { createOrder } from "@/services/order"; // your DB logic
 import crypto from "crypto";
 import { getSessionUser } from "@/data/user";
+import { DeliveryOption } from "@/context/DeliveryContext";
 
 export type CheckoutState = {
   errors?: Record<string, string[]>;
@@ -13,6 +14,7 @@ export type CheckoutState = {
 export async function createOrderAction(
   pathname: string,
   cart: any[],
+  deliveryOption: DeliveryOption,
   prevState: CheckoutState | undefined,
   formData: FormData
 ) {
@@ -46,7 +48,7 @@ export async function createOrderAction(
     );
 
     url = await createPaymentUrl(
-      order?.totalAmount!,
+      order?.totalAmount! + deliveryOption.price,
       "Aluwa HairCare Product",
       order?._id!.toString()
     );

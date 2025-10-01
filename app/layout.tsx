@@ -5,6 +5,7 @@ import { CartProvider } from "@/context/CartContext";
 import { Navigation } from "@/components/ui/navigation";
 import { AuthProvider } from "@/context/AuthContext";
 import Script from "next/script";
+import { DeliveryProvider } from "@/context/DeliveryContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,8 +54,10 @@ export default function RootLayout({
         </Script>
         <AuthProvider>
           <CartProvider>
-            <Navigation />
-            {children}
+            <DeliveryProvider>
+              <Navigation />
+              {children}
+            </DeliveryProvider>
           </CartProvider>
         </AuthProvider>
       </body>
