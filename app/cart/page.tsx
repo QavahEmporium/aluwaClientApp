@@ -4,13 +4,19 @@ import { useDelivery } from "@/context/DeliveryContext";
 import { AnimatePresence, motion } from "framer-motion";
 import CartItem from "@/components/cart/cart-item";
 import CartSummary from "@/components/cart/cart-summary";
+import { useEffect } from "react";
 
 export default function CartPage() {
   const { cart } = useCart();
   const { selectedDelivery, setSelectedDelivery } = useDelivery();
+  const pudo = { id: "pudo", name: "Pudo Locker", price: 89 };
+  
+  useEffect(() => {
+    setSelectedDelivery(pudo);
+  }, []);
 
   // Example delivery options
-  const deliveryOptions = [{ id: "pudo", name: "Pudo Locker", price: 89 }];
+  const deliveryOptions = [pudo];
 
   const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
