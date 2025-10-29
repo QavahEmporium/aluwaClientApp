@@ -7,12 +7,18 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const LandingHeroSection = () => {
   const router = useRouter();
 
-  // Track scroll progress (0 → 1 across page height)
+  // Track scroll progress for parallax
   const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 300], [0, 80]);
+  const scale = useTransform(scrollY, [0, 300], [1, 1.05]);
 
-  // Create a parallax effect for the background image
-  const y = useTransform(scrollY, [0, 300], [0, 80]); // moves image slightly down
-  const scale = useTransform(scrollY, [0, 300], [1, 1.05]); // zooms slightly on scroll
+  // Scroll smoothly to bottom (Contact Us)
+  const handleScrollToContact = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <section className="relative h-[100vh] flex items-center justify-center overflow-hidden">
@@ -40,7 +46,7 @@ const LandingHeroSection = () => {
 
       {/* Hero Content */}
       <div className="relative z-20 text-center px-6">
-        {/* Logo with animation */}
+        {/* Logo */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -56,6 +62,7 @@ const LandingHeroSection = () => {
           />
         </motion.div>
 
+        {/* Heading */}
         <motion.h1
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: -60, opacity: 1 }}
@@ -65,25 +72,37 @@ const LandingHeroSection = () => {
           Premium Hair & Beard Care
         </motion.h1>
 
+        {/* Subheading */}
         <motion.p
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: -60, opacity: 1 }}
           transition={{ duration: 0.9, delay: 0.6, ease: "easeOut" }}
           className="text-white/90 mb-6 max-w-md mx-auto"
         >
-          Natural, effective, and designed for anyone who values authenticity and results.
+          Natural, effective, and designed for anyone who values authenticity
+          and results.
         </motion.p>
 
+        {/* Buttons: Shop Now + Contact Us */}
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: -60, opacity: 1 }}
           transition={{ duration: 1, delay: 0.9, ease: "easeOut" }}
+          className="flex flex-col sm:flex-row justify-center gap-4"
         >
           <Button
             onClick={() => router.push("/products")}
             className="bg-rose-bud-500 hover:bg-rose-bud-400 text-white"
           >
             Shop Now
+          </Button>
+
+          <Button
+            onClick={handleScrollToContact}
+            variant="outline"
+            className="border-white text-gray-900 hover:bg-white hover:bg-gray-200 transition"
+          >
+            Contact Us
           </Button>
         </motion.div>
       </div>
