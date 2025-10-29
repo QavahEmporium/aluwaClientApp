@@ -104,7 +104,7 @@ const CallToAction = () => {
           className="flex flex-col justify-center gap-2 mt-4"
         >
           <h4 className="text-xl font-semibold mb-2">Contact Us</h4>
-          <div className="flex flex-row justify-center items-center space-x-2">
+          <div className="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-x-2">
             <a
               href="mailto:aluwahaircare@gmail.com"
               className="flex items-center gap-2 hover:text-white"

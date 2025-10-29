@@ -88,7 +88,7 @@ const LandingHeroSection = () => {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: -60, opacity: 1 }}
           transition={{ duration: 1, delay: 0.9, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row justify-center gap-4"
+          className="flex flex-row justify-center gap-4"
         >
           <Button
             onClick={() => router.push("/products")}
