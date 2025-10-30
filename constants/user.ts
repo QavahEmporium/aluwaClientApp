@@ -96,3 +96,26 @@ export const loginFormData = [
     isPassword: true,
   },
 ];
+
+export const resetPasswordFormData = [
+  {
+    label: "Password",
+    type: "password",
+    name: "password",
+    placeholder: "Password",
+    Icon: Key,
+    bgColour: "bg-gray-50",
+    isRequired: true,
+    isPassword: true,
+  },
+  {
+    label: "Confirm Password",
+    type: "password",
+    name: "confirmPassword",
+    placeholder: "Confirm Password",
+    Icon: Key,
+    bgColour: "bg-gray-50",
+    isRequired: true,
+    isPassword: true,
+  },
+];

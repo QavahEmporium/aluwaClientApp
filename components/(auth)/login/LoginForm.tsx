@@ -12,11 +12,7 @@ import { startTransition, useActionState, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
-  const initialState = {
-    message: "",
-    errors: {},
-  };
-
+  const initialState = { message: "", errors: {} };
   const { login } = useAuth();
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("redirect") || "/";
@@ -38,6 +34,7 @@ const LoginForm = () => {
       password: "",
     },
   });
+
   const formRef = useRef<HTMLFormElement>(null);
 
   return (
@@ -53,14 +50,13 @@ const LoginForm = () => {
               const formData = new FormData(formRef.current!);
               startTransition(() => {
                 formAction(formData);
-                const user = Object.fromEntries(formData);
                 login();
               });
             })(evt);
           }}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center w-full"
         >
-          {" "}
+          {/* Email + Password Inputs */}
           <div className="w-full mb-4">
             {loginFormData.map((data) => (
               <InputValidated
@@ -73,11 +69,23 @@ const LoginForm = () => {
               />
             ))}
           </div>
+          {/* Submit Button */}
           <SubmitButton name="Sign In" isPending={isPending} />
-          <p className="mt-5 text-sm text-turquoise-900">
-            Don't have an account yet?
+          {/* Forgot Password Link */}
+          <div className="w-full text-center mb-4">
             <Link
-              className="text-pinklet-500 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
+              href="/forgot-password"
+              className="text-sm text-rose-bud-500 hover:underline"
+            >
+              Forgot Password?
+            </Link>
+          </div>
+
+          {/* Register CTA */}
+          <p className="mt-5 text-sm text-turquoise-900">
+            Don't have an account yet?{" "}
+            <Link
+              className="text-pinklet-500 hover:underline font-medium"
               href={`/register?redirect=${redirectPath}`}
             >
               Sign Up here

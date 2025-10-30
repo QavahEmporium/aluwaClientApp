@@ -101,3 +101,59 @@ export const updateProfileSchema = z.object({
 export type RegisterUserForm = z.infer<typeof registerUserformSchema>;
 export type LoginUserForm = z.infer<typeof loginUserFormSchema>;
 export type UpdateAccountForm = z.infer<typeof updateAccountformSchema>;
+
+// 🧱 Schema for form validation
+export const forgotPasswordFormSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+});
+
+export type ForgotPasswordState = {
+  errors?: {
+    email?: string[];
+  };
+  message?: string;
+};
+
+export const forgotPasswordSchema = z.object({
+  email: z.string().email("Please enter a valid email address."),
+});
+
+export type ForgotPasswordForm = z.infer<typeof forgotPasswordSchema>;
+
+/** -----------------------------
+RESET PASSWORD FORM SCHEMA
+*/
+export const resetPasswordFormSchema = z
+  .object({
+    password: z
+      .string()
+      .min(8, { message: "Be at least 8 characters long" })
+      .regex(/[a-zA-Z]/, { message: "Contain at least one letter." })
+      .regex(/[a-z]/, { message: "Contain at least one lowercase letter." })
+      .regex(/[0-9]/, { message: "Contain at least one number." })
+      .trim(),
+    confirmPassword: z.string().transform((pwd) => pwd.trim()),
+  })
+  .superRefine(({ password, confirmPassword }, ctx) => {
+    if (password !== confirmPassword) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Passwords don't match.",
+        path: ["confirmPassword"],
+      });
+    }
+  });
+
+export type ResetPasswordForm = z.infer<typeof resetPasswordFormSchema>;
+
+/** -----------------------------
+RESET PASSWORD STATE (for server action)
+*/
+
+export type ResetPasswordState = {
+  errors?: {
+    password?: string[];
+    confirmPassword?: string[];
+  };
+  message?: string | null;
+};

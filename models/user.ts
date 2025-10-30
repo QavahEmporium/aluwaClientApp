@@ -4,6 +4,8 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 
 interface UserDocument extends Document, IUser {
   password: string;
+  resetToken: string | null;
+  resetTokenExpiry: Date | null;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -28,6 +30,8 @@ const UserSchema = new Schema<UserDocument>(
     role: { type: String, enum: ["customer", "admin"], default: "customer" },
     authType: { type: String, default: "credentials" },
     avatarUrl: { type: String },
+    resetToken: { type: String },
+    resetTokenExpiry: { type: Date },
   },
   { timestamps: true }
 );
