@@ -26,7 +26,7 @@ export default function CartSummary({ subtotal, total }: CartSummaryProps) {
           <span>Delivery ({selectedDelivery.name})</span>
           <span>
             {selectedDelivery.price === 0
-              ? "Free"
+              ? "R 0.00"
               : `R ${selectedDelivery.price.toFixed(2)}`}
           </span>
         </div>

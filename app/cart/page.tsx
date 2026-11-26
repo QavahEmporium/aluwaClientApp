@@ -9,7 +9,8 @@ import { useEffect } from "react";
 export default function CartPage() {
   const { cart } = useCart();
   const { selectedDelivery, setSelectedDelivery } = useDelivery();
-  const pudo = { id: "pudo", name: "Pudo Locker", price: 89 };
+  // const pudo = { id: "pudo", name: "Pudo Locker", price: 89 };
+  const pudo = { id: "", name: "Free Shipping", price: 0 };
   
   useEffect(() => {
     setSelectedDelivery(pudo);
@@ -73,7 +74,7 @@ export default function CartPage() {
                     <span>{option.name}</span>
                   </div>
                   <span className="font-medium">
-                    {option.price === 0 ? "Free" : `R${option.price}`}
+                    {option.price === 0 ? "R0" : `R${option.price}`}
                   </span>
                 </label>
               ))}
